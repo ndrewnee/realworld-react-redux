@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import App from './components/App'
-import reportWebVitals from './reportWebVitals'
-import store from './store'
+import App from 'components/App'
+import reportWebVitals from 'reportWebVitals'
+import store from 'store'
 
 ReactDOM.render(
   <React.StrictMode>

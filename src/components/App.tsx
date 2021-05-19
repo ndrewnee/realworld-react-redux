@@ -1,5 +1,5 @@
 import React from 'react'
-import Header, { HeaderProps } from './Header'
+import Header, { HeaderProps } from 'components/Header'
 
 function App(props: HeaderProps) {
   return (
