@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Header, { HeaderProps } from 'components/Header'
 
-function App(props: HeaderProps) {
+const App: FC<HeaderProps> = ({ appName, currentUser }) => {
   return (
     <div>
-      <Header appName={props.appName} currentUser={props.currentUser} />
+      <Header appName={appName} currentUser={currentUser} />
     </div>
   )
 }

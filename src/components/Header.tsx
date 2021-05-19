@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-export interface HeaderProps {
+export type HeaderProps = {
   appName?: string
   currentUser?: {
     username: string
@@ -9,23 +9,8 @@ export interface HeaderProps {
   }
 }
 
-function Header(props: HeaderProps) {
-  return (
-    <nav className="navbar navbar-light">
-      <div className="container">
-        <Link to="/" className="navbar-brand">
-          {props.appName?.toLowerCase() ?? ''}
-        </Link>
-
-        <LoggedOutView currentUser={props.currentUser} />
-        <LoggedInView currentUser={props.currentUser} />
-      </div>
-    </nav>
-  )
-}
-
-function LoggedOutView(props: HeaderProps) {
-  if (props.currentUser) {
+const LoggedOutUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
+  if (currentUser) {
     return null
   }
 
@@ -52,8 +37,10 @@ function LoggedOutView(props: HeaderProps) {
   )
 }
 
-function LoggedInView(props: HeaderProps) {
-  if (!props.currentUser) {
+const LoggedOut = React.memo(LoggedOutUnmemoized)
+
+const LoggedInUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
+  if (!currentUser) {
     return null
   }
 
@@ -78,18 +65,32 @@ function LoggedInView(props: HeaderProps) {
       </li>
 
       <li className="nav-item">
-        <Link to={`/@${props.currentUser.username}`} className="nav-link">
+        <Link to={`/@${currentUser.username}`} className="nav-link">
           <img
-            src={
-              props.currentUser.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'
-            }
+            src={currentUser.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
             className="user-pic"
-            alt={props.currentUser.username}
+            alt={currentUser.username}
           />
-          {props.currentUser.username}
+          {currentUser.username}
         </Link>
       </li>
     </ul>
+  )
+}
+
+const LoggedIn = React.memo(LoggedInUnmemoized)
+
+const Header: FC<HeaderProps> = ({ appName, currentUser }) => {
+  return (
+    <nav className="navbar navbar-light">
+      <div className="container">
+        <Link to="/" className="navbar-brand">
+          {appName?.toLowerCase() ?? ''}
+        </Link>
+        <LoggedOut currentUser={currentUser} />
+        <LoggedIn currentUser={currentUser} />
+      </div>
+    </nav>
   )
 }
 
