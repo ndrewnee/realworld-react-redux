@@ -1,8 +1,15 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { AppProps } from 'components/App'
 
-const LoggedOutUnmemoized: FC<AppProps> = ({ currentUser }) => {
+type HeaderProps = {
+  appName?: string
+  currentUser?: {
+    username: string
+    image: string
+  }
+}
+
+const LoggedOutUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
   if (currentUser) {
     return null
   }
@@ -32,7 +39,7 @@ const LoggedOutUnmemoized: FC<AppProps> = ({ currentUser }) => {
 
 const LoggedOut = React.memo(LoggedOutUnmemoized)
 
-const LoggedInUnmemoized: FC<AppProps> = ({ currentUser }) => {
+const LoggedInUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
   if (!currentUser) {
     return null
   }
@@ -73,7 +80,7 @@ const LoggedInUnmemoized: FC<AppProps> = ({ currentUser }) => {
 
 const LoggedIn = React.memo(LoggedInUnmemoized)
 
-const Header: FC<AppProps> = ({ appName, currentUser }) => {
+const Header: FC<HeaderProps> = ({ appName, currentUser }) => {
   return (
     <nav className="navbar navbar-light">
       <div className="container">
