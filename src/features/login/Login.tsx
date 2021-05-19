@@ -1,30 +1,32 @@
-import React, { FC } from 'react'
+import React, { useEffect, ChangeEventHandler, FC, FormEventHandler } from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 import agent from 'api/agent'
 import ListErrors from 'components/ListErrors'
-import { UPDATE_FIELD_AUTH, LOGIN, LOGIN_PAGE_UNLOADED } from 'constants/actionTypes'
+import { useAppSelector, useAppDispatch } from 'app/hooks'
+import { selectLogin, login, updateField, unload } from 'features/login/loginSlice'
 
-const mapStateToProps = (state) => state.auth
+const Login: FC = () => {
+  const { email, password, inProgress, errors } = useAppSelector(selectLogin)
+  const dispatch = useAppDispatch()
 
-const mapDispatchToProps = (dispatch) => ({
-  onChangeEmail: (value) => dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
-  onChangePassword: (value) => dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
-  onSubmit: (email, password) =>
-    dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
-  onUnload: () => dispatch({ type: LOGIN_PAGE_UNLOADED }),
-})
+  const changeEmail: ChangeEventHandler<HTMLInputElement> = (event) =>
+    dispatch(updateField({ email: event.target.value }))
 
-const Login: FC<any> = (props) => {
-  const email = props.email
-  const password = props.password
+  const changePassword: ChangeEventHandler<HTMLInputElement> = (event) =>
+    dispatch(updateField({ password: event.target.value }))
 
-  const changeEmail = (ev) => props.onChangeEmail(ev.target.value)
-  const changePassword = (ev) => props.onChangePassword(ev.target.value)
-  const submitForm = (email, password) => (ev) => {
-    ev.preventDefault()
-    props.onSubmit(email, password)
-  }
+  const submitForm =
+    (email: string, password: string): FormEventHandler =>
+    (event) => {
+      event.preventDefault()
+      dispatch(login(agent.Auth.login(email, password)))
+    }
+
+  useEffect(() => {
+    return () => {
+      dispatch(unload())
+    }
+  }, [dispatch])
 
   return (
     <div className="auth-page">
@@ -36,7 +38,7 @@ const Login: FC<any> = (props) => {
               <Link to="/register">Need an account?</Link>
             </p>
 
-            <ListErrors errors={props.errors} />
+            <ListErrors errors={errors} />
 
             <form onSubmit={submitForm(email, password)}>
               <fieldset>
@@ -46,7 +48,7 @@ const Login: FC<any> = (props) => {
                     autoComplete="username"
                     type="email"
                     placeholder="Email"
-                    value={email || ''}
+                    value={email}
                     onChange={changeEmail}
                   />
                 </fieldset>
@@ -57,7 +59,7 @@ const Login: FC<any> = (props) => {
                     type="password"
                     autoComplete="current-password"
                     placeholder="Password"
-                    value={password || ''}
+                    value={password}
                     onChange={changePassword}
                   />
                 </fieldset>
@@ -65,7 +67,7 @@ const Login: FC<any> = (props) => {
                 <button
                   className="btn btn-lg btn-primary pull-xs-right"
                   type="submit"
-                  disabled={props.inProgress}
+                  disabled={inProgress}
                 >
                   Sign in
                 </button>
@@ -78,4 +80,4 @@ const Login: FC<any> = (props) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login

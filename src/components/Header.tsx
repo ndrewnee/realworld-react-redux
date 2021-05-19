@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
+import { User } from 'models/user'
 
 type HeaderProps = {
-  appName?: string
-  currentUser?: {
-    username: string
-    image: string
-  }
+  appName: string
+  currentUser: User | null
 }
 
-const LoggedOutUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
+type LoggedProps = Omit<HeaderProps, 'appName'>
+
+const LoggedOutUnmemoized: FC<LoggedProps> = ({ currentUser }) => {
   if (currentUser) {
     return null
   }
@@ -39,7 +39,7 @@ const LoggedOutUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
 
 const LoggedOut = React.memo(LoggedOutUnmemoized)
 
-const LoggedInUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
+const LoggedInUnmemoized: FC<LoggedProps> = ({ currentUser }) => {
   if (!currentUser) {
     return null
   }
@@ -85,7 +85,7 @@ const Header: FC<HeaderProps> = ({ appName, currentUser }) => {
     <nav className="navbar navbar-light">
       <div className="container">
         <Link to="/" className="navbar-brand">
-          {appName?.toLowerCase() ?? ''}
+          {appName.toLowerCase()}
         </Link>
         <LoggedOut currentUser={currentUser} />
         <LoggedIn currentUser={currentUser} />
