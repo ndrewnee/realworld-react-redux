@@ -1,20 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import agent from 'api/agent'
 import { RootState } from 'app/store'
+import { LoginRequest } from 'models/user'
 
 type LoginState = {
   email: string
   password: string
   inProgress: boolean
-  errors: {
+  errors?: {
     [k: string]: string
-  } | null
-}
-
-type LoginPayload = {
-  errors: {
-    [k: string]: string
-  } | null
+  }
 }
 
 type UpdateFieldPayload = {
@@ -26,10 +21,17 @@ const initialState: LoginState = {
   email: '',
   password: '',
   inProgress: false,
-  errors: null,
 }
 
-export const auth = createAsyncThunk('login/auth', agent.Auth.login)
+export const auth = createAsyncThunk('login/login', async (user: LoginRequest) => {
+  const response = await agent.Auth.login(user)
+  if (response.user?.token) {
+    window.localStorage.setItem('jwt', response.user.token)
+    agent.setToken(response.user.token)
+  }
+
+  return response
+})
 
 const loginSlice = createSlice({
   name: 'login',
@@ -42,7 +44,7 @@ const loginSlice = createSlice({
     unload: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(auth.fulfilled, (state, { payload }: PayloadAction<LoginPayload>) => {
+    builder.addCase(auth.fulfilled, (state, { payload }) => {
       state.errors = payload.errors
     })
   },

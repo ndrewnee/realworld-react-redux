@@ -14,10 +14,8 @@ const App: FC = () => {
     const token = window.localStorage.getItem('jwt')
     if (token) {
       agent.setToken(token)
+      dispatch(load())
     }
-
-    const currentUser = token ? agent.Auth.current() : null
-    dispatch(load({ currentUser, token }))
   }, [dispatch])
 
   useEffect(() => {

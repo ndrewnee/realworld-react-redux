@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 
 type Props = {
-  errors: {
+  errors?: {
     [k: string]: string
-  } | null
+  }
 }
 
 const ListErrors: FC<Props> = ({ errors }) => {
