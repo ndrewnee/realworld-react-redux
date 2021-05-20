@@ -1,11 +1,11 @@
+import App from 'app/App'
+import store, { history } from 'app/store'
+import { ConnectedRouter } from 'connected-react-router'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { Switch, Route } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
-import App from 'app/App'
+import { Route, Switch } from 'react-router-dom'
 import reportWebVitals from 'reportWebVitals'
-import store, { history } from 'app/store'
 
 ReactDOM.render(
   <React.StrictMode>

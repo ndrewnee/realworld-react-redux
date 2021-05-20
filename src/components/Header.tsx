@@ -1,6 +1,6 @@
+import { User } from 'models/user'
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { User } from 'models/user'
 
 type HeaderProps = {
   currentUser: User | null

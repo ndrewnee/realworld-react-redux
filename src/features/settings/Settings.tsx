@@ -1,10 +1,10 @@
-import React, { ChangeEventHandler, FC, FormEventHandler, MouseEventHandler, useState } from 'react'
-import ListErrors from 'components/ListErrors'
+import agent from 'api/agent'
+import { logout, selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import ListErrors from 'components/ListErrors'
 import { saveUser, selectSettings } from 'features/settings/settingsSlice'
 import { SaveUserRequest } from 'models/user'
-import { logout, selectApp } from 'app/appSlice'
-import agent from 'api/agent'
+import React, { ChangeEventHandler, FC, FormEventHandler, MouseEventHandler, useState } from 'react'
 
 type SettingsFormProps = {
   onSubmitForm: (user: SaveUserRequest) => void

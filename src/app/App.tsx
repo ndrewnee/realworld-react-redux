@@ -1,12 +1,12 @@
-import React, { FC, Suspense, useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { push } from 'connected-react-router'
+import { load, redirect, selectApp } from 'app/appSlice'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import Header from 'components/Header'
+import { push } from 'connected-react-router'
 import Login from 'features/login/Login'
 import Register from 'features/register/Register'
 import Settings from 'features/settings/Settings'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { load, redirect, selectApp } from 'app/appSlice'
+import React, { FC, Suspense, useEffect } from 'react'
+import { Route, Switch } from 'react-router-dom'
 
 const App: FC = () => {
   const { appLoaded, currentUser, redirectTo } = useAppSelector(selectApp)

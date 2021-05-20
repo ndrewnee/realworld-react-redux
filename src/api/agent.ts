@@ -1,13 +1,13 @@
-import superagent from 'superagent'
 import {
+  GetUserResponse,
   LoginRequest,
   LoginResponse,
-  GetUserResponse,
   RegisterRequest,
   RegisterResponse,
   SaveUserRequest,
   SaveUserResponse,
 } from 'models/user'
+import superagent from 'superagent'
 
 const API_ROOT = process.env.REACT_APP_BACKEND_URL || 'https://conduit.productionready.io/api'
 let token: string | null = null

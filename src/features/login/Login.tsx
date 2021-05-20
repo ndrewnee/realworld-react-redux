@@ -1,8 +1,8 @@
-import React, { useEffect, ChangeEventHandler, FC, FormEventHandler, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { selectLogin, auth, unload } from 'features/login/loginSlice'
+import { auth, selectLogin, unload } from 'features/login/loginSlice'
+import React, { ChangeEventHandler, FC, FormEventHandler, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Login: FC = () => {
   const { inProgress, errors } = useAppSelector(selectLogin)
