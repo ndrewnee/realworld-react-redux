@@ -1,5 +1,12 @@
 import superagent from 'superagent'
-import { User, LoginRequest, LoginResponse, GetUserResponse } from 'models/user'
+import {
+  User,
+  LoginRequest,
+  LoginResponse,
+  GetUserResponse,
+  RegisterRequest,
+  RegisterResponse,
+} from 'models/user'
 
 const API_ROOT = process.env.REACT_APP_BACKEND_URL || 'https://conduit.productionready.io/api'
 let token: string | null = null
@@ -15,7 +22,11 @@ const makeRequest = async (req: superagent.Request) => {
     const response = await req
     return response.body
   } catch (err) {
-    return err.response.body
+    if (err.response?.body) {
+      return err.response.body
+    }
+
+    throw err
   }
 }
 
@@ -27,11 +38,11 @@ const requests = {
 }
 
 const Auth = {
-  current: async (): Promise<GetUserResponse> => makeRequest(requests.get('/user')),
-  login: async (user: LoginRequest): Promise<LoginResponse> =>
+  current: (): Promise<GetUserResponse> => makeRequest(requests.get('/user')),
+  login: (user: LoginRequest): Promise<LoginResponse> =>
     makeRequest(requests.post('/users/login', { user })),
-  register: (username: string, email: string, password: string) =>
-    requests.post('/users', { user: { username, email, password } }),
+  register: (user: RegisterRequest): Promise<RegisterResponse> =>
+    makeRequest(requests.post('/users', { user })),
   save: (user: User) => requests.put('/user', { user }),
 }
 

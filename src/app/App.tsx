@@ -1,8 +1,8 @@
 import React, { FC, Suspense, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import agent from 'api/agent'
 import Header from 'components/Header'
 import Login from 'features/login/Login'
+import Register from 'features/register/Register'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { load, redirect, selectApp } from 'app/appSlice'
 
@@ -11,11 +11,7 @@ const App: FC = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const token = window.localStorage.getItem('jwt')
-    if (token) {
-      agent.setToken(token)
-      dispatch(load())
-    }
+    dispatch(load())
   }, [dispatch])
 
   useEffect(() => {
@@ -38,6 +34,7 @@ const App: FC = () => {
       <Suspense fallback={<p>Loading...</p>}>
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
         </Switch>
       </Suspense>
     </div>

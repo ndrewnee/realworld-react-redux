@@ -4,7 +4,7 @@ import { User } from 'models/user'
 
 type HeaderProps = {
   appName: string
-  currentUser: User | null
+  currentUser?: User
 }
 
 type LoggedProps = Omit<HeaderProps, 'appName'>
@@ -67,7 +67,7 @@ const LoggedInUnmemoized: FC<LoggedProps> = ({ currentUser }) => {
       <li className="nav-item">
         <Link to={`/@${currentUser.username}`} className="nav-link">
           <img
-            src={currentUser.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
+            src={currentUser.image ?? 'https://static.productionready.io/images/smiley-cyrus.jpg'}
             className="user-pic"
             alt={currentUser.username}
           />

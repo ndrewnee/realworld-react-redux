@@ -1,7 +1,7 @@
 export type User = {
   username: string
-  image?: string
-  token?: string
+  token: string
+  image: string | null
 }
 
 export type GetUserResponse = {
@@ -14,6 +14,19 @@ export type LoginRequest = {
 }
 
 export type LoginResponse = {
+  user?: User
+  errors?: {
+    [k: string]: string
+  }
+}
+
+export type RegisterRequest = {
+  username: string
+  email: string
+  password: string
+}
+
+export type RegisterResponse = {
   user?: User
   errors?: {
     [k: string]: string
