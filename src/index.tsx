@@ -1,19 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
 import App from 'app/App'
 import reportWebVitals from 'reportWebVitals'
-import store from 'app/store'
+import store, { history } from 'app/store'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
+      <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" component={App} />
         </Switch>
-      </Router>
+      </ConnectedRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

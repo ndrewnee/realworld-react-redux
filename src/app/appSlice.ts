@@ -8,6 +8,7 @@ type AppState = {
   appLoaded: boolean
   redirectTo: string | null
   currentUser: User | null
+  token: string | null
 }
 
 const initialState: AppState = {
@@ -15,6 +16,7 @@ const initialState: AppState = {
   appLoaded: false,
   redirectTo: null,
   currentUser: null,
+  token: null,
 }
 
 export const load = createAsyncThunk('app/load', async () => {
@@ -35,12 +37,14 @@ const appSlice = createSlice({
     logout: (state) => {
       state.redirectTo = '/'
       state.currentUser = null
+      state.token = null
     },
   },
   extraReducers: (builder) => {
     builder.addCase(load.fulfilled, (state, { payload }) => {
       state.appLoaded = true
       state.currentUser = payload?.user ?? null
+      state.token = payload?.user?.token ?? null
     })
   },
 })

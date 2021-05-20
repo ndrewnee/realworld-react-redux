@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { saveUser, selectSettings } from 'features/settings/settingsSlice'
 import { SaveUserRequest } from 'models/user'
 import { logout, selectApp } from 'app/appSlice'
+import agent from 'api/agent'
 
 type SettingsFormProps = {
   onSubmitForm: (user: SaveUserRequest) => void
@@ -14,10 +15,10 @@ const SettingsForm: FC<SettingsFormProps> = ({ onSubmitForm }) => {
   const { inProgress } = useAppSelector(selectSettings)
 
   const [user, setUser] = useState({
-    image: currentUser?.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
-    username: currentUser?.username || '',
-    bio: currentUser?.bio || '',
-    email: currentUser?.email || '',
+    image: currentUser?.image ?? 'https://static.productionready.io/images/smiley-cyrus.jpg',
+    username: currentUser?.username ?? '',
+    bio: currentUser?.bio ?? '',
+    email: currentUser?.email ?? '',
     password: '',
   })
 
@@ -116,6 +117,7 @@ const Settings: FC = () => {
   const onSubmitForm = (user: SaveUserRequest) => dispatch(saveUser(user))
   const clickLogout: MouseEventHandler = () => {
     window.localStorage.removeItem('jwt')
+    agent.setToken(null)
     dispatch(logout())
   }
 

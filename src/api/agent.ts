@@ -94,7 +94,7 @@ const agent = {
   Comments,
   Profile,
   Tags,
-  setToken: (newToken: string) => {
+  setToken: (newToken: string | null) => {
     token = newToken
   },
 }

@@ -1,5 +1,6 @@
 import React, { FC, Suspense, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { push } from 'connected-react-router'
 import Header from 'components/Header'
 import Login from 'features/login/Login'
 import Register from 'features/register/Register'
@@ -17,6 +18,7 @@ const App: FC = () => {
 
   useEffect(() => {
     if (redirectTo != null) {
+      dispatch(push(redirectTo))
       dispatch(redirect())
     }
   }, [dispatch, redirectTo])

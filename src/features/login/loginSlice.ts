@@ -23,7 +23,7 @@ const initialState: LoginState = {
   inProgress: false,
 }
 
-export const auth = createAsyncThunk('login/login', async (user: LoginRequest) => {
+export const auth = createAsyncThunk('login/auth', async (user: LoginRequest) => {
   const response = await agent.Auth.login(user)
   if (response.user?.token) {
     window.localStorage.setItem('jwt', response.user.token)
