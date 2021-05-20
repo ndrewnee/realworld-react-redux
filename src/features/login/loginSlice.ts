@@ -11,7 +11,6 @@ type LoginState = {
 }
 
 type LoginPayload = {
-  error?: boolean
   errors: {
     [k: string]: string
   } | null
@@ -35,7 +34,7 @@ const loginSlice = createSlice({
   reducers: {
     login: (state, action: PayloadAction<LoginPayload>) => {
       state.inProgress = false
-      state.errors = action.payload.error ? action.payload.errors : null
+      state.errors = action.payload.errors ?? null
 
       return state
     },
@@ -45,7 +44,7 @@ const loginSlice = createSlice({
 
       return state
     },
-    unload: (state) => {
+    unload: () => {
       return initialState
     },
   },

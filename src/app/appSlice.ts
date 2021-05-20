@@ -12,7 +12,7 @@ type AppState = {
 
 type LoadPayload = {
   token: string | null
-  currentUser?: UserResponse
+  currentUser: UserResponse | null
 }
 
 const initialState: AppState = {
