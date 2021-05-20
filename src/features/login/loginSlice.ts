@@ -1,25 +1,16 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import agent from 'api/agent'
 import { RootState } from 'app/store'
 import { LoginRequest } from 'models/user'
 
 type LoginState = {
-  email: string
-  password: string
   inProgress: boolean
   errors?: {
     [k: string]: string
   }
 }
 
-type UpdateFieldPayload = {
-  email?: string
-  password?: string
-}
-
 const initialState: LoginState = {
-  email: '',
-  password: '',
   inProgress: false,
 }
 
@@ -37,10 +28,6 @@ const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    updateField: (state, { payload }: PayloadAction<UpdateFieldPayload>) => {
-      state.email = payload.email ?? state.email
-      state.password = payload.password ?? state.password
-    },
     unload: () => initialState,
   },
   extraReducers: (builder) => {
@@ -58,7 +45,7 @@ const loginSlice = createSlice({
   },
 })
 
-export const { updateField, unload } = loginSlice.actions
+export const { unload } = loginSlice.actions
 export const selectLogin = (state: RootState) => state.login
 
 export default loginSlice.reducer

@@ -1,18 +1,20 @@
-import React, { useEffect, ChangeEventHandler, FC, FormEventHandler } from 'react'
+import React, { useEffect, ChangeEventHandler, FC, FormEventHandler, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ListErrors from 'components/ListErrors'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { selectLogin, auth, updateField, unload } from 'features/login/loginSlice'
+import { selectLogin, auth, unload } from 'features/login/loginSlice'
 
 const Login: FC = () => {
-  const { email, password, inProgress, errors } = useAppSelector(selectLogin)
+  const { inProgress, errors } = useAppSelector(selectLogin)
   const dispatch = useAppDispatch()
 
-  const changeEmail: ChangeEventHandler<HTMLInputElement> = (event) =>
-    dispatch(updateField({ email: event.target.value }))
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const changeEmail: ChangeEventHandler<HTMLInputElement> = (event) => setEmail(event.target.value)
 
   const changePassword: ChangeEventHandler<HTMLInputElement> = (event) =>
-    dispatch(updateField({ password: event.target.value }))
+    setPassword(event.target.value)
 
   const submitForm =
     (email: string, password: string): FormEventHandler =>

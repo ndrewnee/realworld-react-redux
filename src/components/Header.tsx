@@ -3,13 +3,10 @@ import { Link } from 'react-router-dom'
 import { User } from 'models/user'
 
 type HeaderProps = {
-  appName: string
   currentUser: User | null
 }
 
-type LoggedProps = Omit<HeaderProps, 'appName'>
-
-const LoggedOutUnmemoized: FC<LoggedProps> = ({ currentUser }) => {
+const LoggedOutUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
   if (currentUser) {
     return null
   }
@@ -39,7 +36,7 @@ const LoggedOutUnmemoized: FC<LoggedProps> = ({ currentUser }) => {
 
 const LoggedOut = React.memo(LoggedOutUnmemoized)
 
-const LoggedInUnmemoized: FC<LoggedProps> = ({ currentUser }) => {
+const LoggedInUnmemoized: FC<HeaderProps> = ({ currentUser }) => {
   if (!currentUser) {
     return null
   }
@@ -80,12 +77,12 @@ const LoggedInUnmemoized: FC<LoggedProps> = ({ currentUser }) => {
 
 const LoggedIn = React.memo(LoggedInUnmemoized)
 
-const Header: FC<HeaderProps> = ({ appName, currentUser }) => {
+const Header: FC<HeaderProps> = ({ currentUser }) => {
   return (
     <nav className="navbar navbar-light">
       <div className="container">
         <Link to="/" className="navbar-brand">
-          {appName.toLowerCase()}
+          conduit
         </Link>
         <LoggedOut currentUser={currentUser} />
         <LoggedIn currentUser={currentUser} />

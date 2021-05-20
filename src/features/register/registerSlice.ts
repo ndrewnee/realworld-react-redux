@@ -1,28 +1,16 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import agent from 'api/agent'
 import { RootState } from 'app/store'
 import { RegisterRequest } from 'models/user'
 
 type RegisterState = {
-  email: string
-  username: string
-  password: string
   inProgress: boolean
   errors?: {
     [k: string]: string
   }
 }
 
-type UpdateFieldPayload = {
-  email?: string
-  username?: string
-  password?: string
-}
-
 const initialState: RegisterState = {
-  email: '',
-  username: '',
-  password: '',
   inProgress: false,
 }
 
@@ -40,11 +28,6 @@ const registerSlice = createSlice({
   name: 'register',
   initialState,
   reducers: {
-    updateField: (state, { payload }: PayloadAction<UpdateFieldPayload>) => {
-      state.username = payload.username ?? state.username
-      state.email = payload.email ?? state.email
-      state.password = payload.password ?? state.password
-    },
     unload: () => initialState,
   },
   extraReducers: (builder) => {
@@ -62,7 +45,7 @@ const registerSlice = createSlice({
   },
 })
 
-export const { updateField, unload } = registerSlice.actions
+export const { unload } = registerSlice.actions
 export const selectRegister = (state: RootState) => state.register
 
 export default registerSlice.reducer

@@ -4,7 +4,6 @@ import { RootState } from 'app/store'
 import { User } from 'models/user'
 
 type AppState = {
-  appName: string
   appLoaded: boolean
   redirectTo: string | null
   currentUser: User | null
@@ -12,7 +11,6 @@ type AppState = {
 }
 
 const initialState: AppState = {
-  appName: 'Conduit',
   appLoaded: false,
   redirectTo: null,
   currentUser: null,

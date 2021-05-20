@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { load, redirect, selectApp } from 'app/appSlice'
 
 const App: FC = () => {
-  const { appName, appLoaded, currentUser, redirectTo } = useAppSelector(selectApp)
+  const { appLoaded, currentUser, redirectTo } = useAppSelector(selectApp)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -26,14 +26,14 @@ const App: FC = () => {
   if (!appLoaded) {
     return (
       <div>
-        <Header appName={appName} currentUser={currentUser} />
+        <Header currentUser={currentUser} />
       </div>
     )
   }
 
   return (
     <div>
-      <Header appName={appName} currentUser={currentUser} />
+      <Header currentUser={currentUser} />
       <Suspense fallback={<p>Loading...</p>}>
         <Switch>
           <Route path="/login" component={Login} />
