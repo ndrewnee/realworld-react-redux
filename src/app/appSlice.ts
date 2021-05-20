@@ -27,10 +27,10 @@ const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    load: (state, action: PayloadAction<LoadPayload>) => {
-      state.token = action.payload.token
+    load: (state, { payload }: PayloadAction<LoadPayload>) => {
       state.appLoaded = true
-      state.currentUser = action.payload.currentUser ? action.payload.currentUser.user : null
+      state.token = payload.token
+      state.currentUser = payload.currentUser ? payload.currentUser.user : null
 
       return state
     },

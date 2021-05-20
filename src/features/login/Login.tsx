@@ -1,9 +1,8 @@
 import React, { useEffect, ChangeEventHandler, FC, FormEventHandler } from 'react'
 import { Link } from 'react-router-dom'
-import agent from 'api/agent'
 import ListErrors from 'components/ListErrors'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { selectLogin, login, updateField, unload } from 'features/login/loginSlice'
+import { selectLogin, auth, updateField, unload } from 'features/login/loginSlice'
 
 const Login: FC = () => {
   const { email, password, inProgress, errors } = useAppSelector(selectLogin)
@@ -19,7 +18,7 @@ const Login: FC = () => {
     (email: string, password: string): FormEventHandler =>
     (event) => {
       event.preventDefault()
-      dispatch(login(agent.Auth.login(email, password)))
+      dispatch(auth({ email, password }))
     }
 
   useEffect(() => {

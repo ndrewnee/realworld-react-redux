@@ -12,33 +12,17 @@ const tokenPlugin: superagent.Plugin = (req) => {
 
 const responseBody = (res: superagent.Response) => res.body
 
-interface SuperagentError extends Error {
-  response: superagent.Response
-}
-
-const handleErrors = (err: SuperagentError) => err.response.body
-
 const requests = {
-  del: (url: string): any =>
-    superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody).catch(handleErrors),
-  get: (url: string): any =>
-    superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody).catch(handleErrors),
-  put: (url: string, body: any): any =>
-    superagent
-      .put(`${API_ROOT}${url}`, body)
-      .use(tokenPlugin)
-      .then(responseBody)
-      .catch(handleErrors),
-  post: (url: string, body: any): any =>
-    superagent
-      .post(`${API_ROOT}${url}`, body)
-      .use(tokenPlugin)
-      .then(responseBody)
-      .catch(handleErrors),
+  del: (url: string) => superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
+  get: (url: string) => superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
+  put: (url: string, body: any) =>
+    superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
+  post: (url: string, body: any) =>
+    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
 }
 
 const Auth = {
-  current: () => requests.get('/user'),
+  current: (): any => requests.get('/user'),
   login: (email: string, password: string) =>
     requests.post('/users/login', { user: { email, password } }),
   register: (username: string, email: string, password: string) =>
