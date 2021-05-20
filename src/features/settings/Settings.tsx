@@ -2,9 +2,16 @@ import agent from 'api/agent'
 import { logout, selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import { saveUser, selectSettings } from 'features/settings/settingsSlice'
+import { saveUser, selectSettings, unload } from 'features/settings/settingsSlice'
 import { SaveUserRequest } from 'models/user'
-import React, { ChangeEventHandler, FC, FormEventHandler, MouseEventHandler, useState } from 'react'
+import React, {
+  ChangeEventHandler,
+  FC,
+  FormEventHandler,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from 'react'
 
 type SettingsFormProps = {
   onSubmitForm: (user: SaveUserRequest) => void
@@ -13,6 +20,7 @@ type SettingsFormProps = {
 const SettingsForm: FC<SettingsFormProps> = ({ onSubmitForm }) => {
   const { currentUser } = useAppSelector(selectApp)
   const { inProgress } = useAppSelector(selectSettings)
+  const dispatch = useAppDispatch()
 
   const [user, setUser] = useState({
     image: currentUser?.image ?? 'https://static.productionready.io/images/smiley-cyrus.jpg',
@@ -42,6 +50,12 @@ const SettingsForm: FC<SettingsFormProps> = ({ onSubmitForm }) => {
     (field: string): ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> =>
     (event) =>
       setUser({ ...user, [field]: event.target.value })
+
+  useEffect(() => {
+    return () => {
+      dispatch(unload())
+    }
+  }, [dispatch])
 
   return (
     <form onSubmit={submitForm}>

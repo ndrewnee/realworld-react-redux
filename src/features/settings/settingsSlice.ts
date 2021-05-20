@@ -18,7 +18,9 @@ export const saveUser = createAsyncThunk('settings/saveUser', agent.Auth.save)
 const settingsSlice = createSlice({
   name: 'settings',
   initialState,
-  reducers: {},
+  reducers: {
+    unload: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(saveUser.pending, (state) => {
       state.inProgress = true
@@ -35,5 +37,6 @@ const settingsSlice = createSlice({
 })
 
 export const selectSettings = (state: RootState) => state.settings
+export const { unload } = settingsSlice.actions
 
 export default settingsSlice.reducer
