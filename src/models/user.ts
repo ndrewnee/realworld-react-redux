@@ -1,7 +1,9 @@
 export type User = {
   username: string
-  token: string
+  email: string
+  bio: string | null
   image: string | null
+  token: string
 }
 
 export type GetUserResponse = {
@@ -27,6 +29,21 @@ export type RegisterRequest = {
 }
 
 export type RegisterResponse = {
+  user?: User
+  errors?: {
+    [k: string]: string
+  }
+}
+
+export type SaveUserRequest = {
+  username: string
+  email: string
+  password?: string
+  bio?: string
+  image?: string
+}
+
+export type SaveUserResponse = {
   user?: User
   errors?: {
     [k: string]: string

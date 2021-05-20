@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Header from 'components/Header'
 import Login from 'features/login/Login'
 import Register from 'features/register/Register'
+import Settings from 'features/settings/Settings'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { load, redirect, selectApp } from 'app/appSlice'
 
@@ -35,6 +36,7 @@ const App: FC = () => {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/settings" component={Settings} />
         </Switch>
       </Suspense>
     </div>

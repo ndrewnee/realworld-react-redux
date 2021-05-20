@@ -7,13 +7,14 @@ type AppState = {
   appName: string
   appLoaded: boolean
   redirectTo: string | null
-  currentUser?: User
+  currentUser: User | null
 }
 
 const initialState: AppState = {
-  appName: '',
+  appName: 'Conduit',
   appLoaded: false,
   redirectTo: null,
+  currentUser: null,
 }
 
 export const load = createAsyncThunk('app/load', async () => {
@@ -31,16 +32,20 @@ const appSlice = createSlice({
     redirect: (state) => {
       state.redirectTo = null
     },
+    logout: (state) => {
+      state.redirectTo = '/'
+      state.currentUser = null
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(load.fulfilled, (state, { payload }) => {
       state.appLoaded = true
-      state.currentUser = payload?.user
+      state.currentUser = payload?.user ?? null
     })
   },
 })
 
-export const { redirect } = appSlice.actions
+export const { redirect, logout } = appSlice.actions
 export const selectApp = (state: RootState) => state.app
 
 export default appSlice.reducer

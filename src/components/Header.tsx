@@ -4,7 +4,7 @@ import { User } from 'models/user'
 
 type HeaderProps = {
   appName: string
-  currentUser?: User
+  currentUser: User | null
 }
 
 type LoggedProps = Omit<HeaderProps, 'appName'>

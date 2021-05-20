@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { selectRegister, signup, updateField, unload } from 'features/register/registerSlice'
 
 const Register: FC = () => {
-  const { email, username, password, inProgress, errors } = useAppSelector(selectRegister)
+  const { username, email, password, inProgress, errors } = useAppSelector(selectRegister)
   const dispatch = useAppDispatch()
 
   const changeUsername: ChangeEventHandler<HTMLInputElement> = (event) =>

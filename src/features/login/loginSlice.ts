@@ -44,8 +44,16 @@ const loginSlice = createSlice({
     unload: () => initialState,
   },
   extraReducers: (builder) => {
+    builder.addCase(auth.pending, (state) => {
+      state.inProgress = true
+    })
     builder.addCase(auth.fulfilled, (state, { payload }) => {
       state.errors = payload.errors
+      state.inProgress = false
+    })
+    builder.addCase(auth.rejected, (state) => {
+      state.errors = { unknown: 'Oops, something went wrong!' }
+      state.inProgress = false
     })
   },
 })
