@@ -29,17 +29,7 @@ const initialState: LoginState = {
   errors: null,
 }
 
-export const auth = createAsyncThunk(
-  'login/auth',
-  async ({ email, password }: { email: string; password: string }) => {
-    try {
-      const response = await agent.Auth.login(email, password)
-      return response.body
-    } catch (err) {
-      return err.response.body
-    }
-  },
-)
+export const auth = createAsyncThunk('login/auth', agent.Auth.login)
 
 const loginSlice = createSlice({
   name: 'login',
@@ -48,12 +38,8 @@ const loginSlice = createSlice({
     updateField: (state, { payload }: PayloadAction<UpdateFieldPayload>) => {
       state.email = payload.email ?? state.email
       state.password = payload.password ?? state.password
-
-      return state
     },
-    unload: () => {
-      return initialState
-    },
+    unload: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(auth.fulfilled, (state, { payload }: PayloadAction<LoginPayload>) => {

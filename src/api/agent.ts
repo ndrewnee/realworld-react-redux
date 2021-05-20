@@ -1,5 +1,5 @@
 import superagent from 'superagent'
-import { User } from 'models/user'
+import { User, UserLoginRequest } from 'models/user'
 
 const API_ROOT = process.env.REACT_APP_BACKEND_URL || 'https://conduit.productionready.io/api'
 let token: string | null = null
@@ -10,21 +10,25 @@ const tokenPlugin: superagent.Plugin = (req) => {
   }
 }
 
-const responseBody = (res: superagent.Response) => res.body
+const makeRequest = async (req: superagent.Request) => {
+  try {
+    const response = await req
+    return response.body
+  } catch (err) {
+    return err.response.body
+  }
+}
 
 const requests = {
-  del: (url: string) => superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
-  get: (url: string) => superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
-  put: (url: string, body: any) =>
-    superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
-  post: (url: string, body: any) =>
-    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
+  del: (url: string) => superagent.del(`${API_ROOT}${url}`).use(tokenPlugin),
+  get: (url: string) => superagent.get(`${API_ROOT}${url}`).use(tokenPlugin),
+  put: (url: string, body: any) => superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin),
+  post: (url: string, body: any) => superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin),
 }
 
 const Auth = {
   current: (): any => requests.get('/user'),
-  login: (email: string, password: string) =>
-    requests.post('/users/login', { user: { email, password } }),
+  login: async (user: UserLoginRequest) => makeRequest(requests.post('/users/login', { user })),
   register: (username: string, email: string, password: string) =>
     requests.post('/users', { user: { username, email, password } }),
   save: (user: User) => requests.put('/user', { user }),

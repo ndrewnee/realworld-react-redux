@@ -31,13 +31,9 @@ const appSlice = createSlice({
       state.appLoaded = true
       state.token = payload.token
       state.currentUser = payload.currentUser ? payload.currentUser.user : null
-
-      return state
     },
     redirect: (state) => {
       state.redirectTo = null
-
-      return state
     },
   },
 })
