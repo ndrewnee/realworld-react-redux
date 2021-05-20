@@ -38,8 +38,8 @@ const registerSlice = createSlice({
       state.errors = payload.errors
       state.inProgress = false
     })
-    builder.addCase(signup.rejected, (state) => {
-      state.errors = { unknown: 'Oops, something went wrong!' }
+    builder.addCase(signup.rejected, (state, action) => {
+      state.errors = { [action.error.name!]: action.error.message! }
       state.inProgress = false
     })
   },

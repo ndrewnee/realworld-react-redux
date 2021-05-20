@@ -27,8 +27,8 @@ const settingsSlice = createSlice({
       state.errors = payload.errors
       state.inProgress = false
     })
-    builder.addCase(saveUser.rejected, (state) => {
-      state.errors = { unknown: 'Oops, something went wrong!' }
+    builder.addCase(saveUser.rejected, (state, action) => {
+      state.errors = { [action.error.name!]: action.error.message! }
       state.inProgress = false
     })
   },
