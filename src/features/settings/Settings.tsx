@@ -13,7 +13,7 @@ import React, {
   useState,
 } from 'react'
 
-type SettingsFormProps = {
+interface SettingsFormProps {
   onSubmitForm: (user: SaveUserRequest) => void
 }
 

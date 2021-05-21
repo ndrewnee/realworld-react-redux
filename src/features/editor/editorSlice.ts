@@ -3,7 +3,7 @@ import agent from 'api/agent'
 import { RootState } from 'app/store'
 import { Article } from 'models/article'
 
-type EditorState = {
+interface EditorState {
   slug?: string
   title: string
   description: string

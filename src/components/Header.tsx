@@ -2,7 +2,7 @@ import { User } from 'models/user'
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-type HeaderProps = {
+interface HeaderProps {
   currentUser: User | null
 }
 

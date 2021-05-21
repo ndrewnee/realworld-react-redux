@@ -15,16 +15,13 @@ import React, {
   useEffect,
   useState,
 } from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 
-interface Props {
-  match: {
-    params: {
-      slug?: string
-    }
-  }
+interface EditorProps {
+  slug: string
 }
 
-const Editor: FC<Props> = ({ match }) => {
+const Editor: FC<RouteComponentProps<EditorProps>> = ({ match }) => {
   const dispatch = useAppDispatch()
   const [tagInput, setTagInput] = useState('')
   const { slug, title, description, body, tagList, inProgress, errors } =

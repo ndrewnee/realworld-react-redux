@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
-type Props = {
+interface ListErrorsProps {
   errors?: {
     [k: string]: string
   }
 }
 
-const ListErrors: FC<Props> = ({ errors }) => {
+const ListErrors: FC<ListErrorsProps> = ({ errors }) => {
   if (!errors) {
     return null
   }

@@ -6,7 +6,7 @@ import { signup } from 'features/register/registerSlice'
 import { saveUser } from 'features/settings/settingsSlice'
 import { User } from 'models/user'
 
-type AppState = {
+interface AppState {
   appLoaded: boolean
   redirectTo: string | null
   currentUser: User | null

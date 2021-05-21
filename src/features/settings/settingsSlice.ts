@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import agent from 'api/agent'
 import { RootState } from 'app/store'
 
-type SettingsState = {
+interface SettingsState {
   inProgress: boolean
   errors?: {
     [k: string]: string

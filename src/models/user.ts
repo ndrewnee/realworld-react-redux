@@ -1,4 +1,4 @@
-export type User = {
+export interface User {
   username: string
   email: string
   bio: string | null
@@ -6,36 +6,36 @@ export type User = {
   token: string
 }
 
-export type GetUserResponse = {
+export interface GetUserResponse {
   user: User
 }
 
-export type LoginRequest = {
+export interface LoginRequest {
   email: string
   password: string
 }
 
-export type LoginResponse = {
+export interface LoginResponse {
   user?: User
   errors?: {
     [k: string]: string
   }
 }
 
-export type RegisterRequest = {
+export interface RegisterRequest {
   username: string
   email: string
   password: string
 }
 
-export type RegisterResponse = {
+export interface RegisterResponse {
   user?: User
   errors?: {
     [k: string]: string
   }
 }
 
-export type SaveUserRequest = {
+export interface SaveUserRequest {
   username: string
   email: string
   password?: string
@@ -43,7 +43,7 @@ export type SaveUserRequest = {
   image?: string
 }
 
-export type SaveUserResponse = {
+export interface SaveUserResponse {
   user?: User
   errors?: {
     [k: string]: string

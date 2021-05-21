@@ -3,7 +3,7 @@ import agent from 'api/agent'
 import { RootState } from 'app/store'
 import { RegisterRequest } from 'models/user'
 
-type RegisterState = {
+interface RegisterState {
   inProgress: boolean
   errors?: {
     [k: string]: string
