@@ -1,13 +1,12 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import { selectRegister, signup, unload } from 'features/register/registerSlice'
+import { selectRegister, signup, pageUnload } from 'features/register/registerSlice'
 import React, { ChangeEventHandler, FC, FormEventHandler, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Register: FC = () => {
-  const { inProgress, errors } = useAppSelector(selectRegister)
   const dispatch = useAppDispatch()
-
+  const { inProgress, errors } = useAppSelector(selectRegister)
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -29,7 +28,7 @@ const Register: FC = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(unload())
+      dispatch(pageUnload())
     }
   }, [dispatch])
 

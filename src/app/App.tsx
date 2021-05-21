@@ -5,12 +5,13 @@ import { push } from 'connected-react-router'
 import Login from 'features/login/Login'
 import Register from 'features/register/Register'
 import Settings from 'features/settings/Settings'
+import Editor from 'features/editor/Editor'
 import React, { FC, Suspense, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 const App: FC = () => {
-  const { appLoaded, currentUser, redirectTo } = useAppSelector(selectApp)
   const dispatch = useAppDispatch()
+  const { appLoaded, currentUser, redirectTo } = useAppSelector(selectApp)
 
   useEffect(() => {
     dispatch(load())
@@ -39,6 +40,8 @@ const App: FC = () => {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/settings" component={Settings} />
+          <Route path="/editor/:slug" component={Editor} />
+          <Route path="/editor" component={Editor} />
         </Switch>
       </Suspense>
     </div>

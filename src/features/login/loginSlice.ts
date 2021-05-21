@@ -28,7 +28,7 @@ const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    unload: () => initialState,
+    pageUnload: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -46,7 +46,7 @@ const loginSlice = createSlice({
   },
 })
 
-export const { unload } = loginSlice.actions
+export const { pageUnload } = loginSlice.actions
 export const selectLogin = (state: RootState) => state.login
 
 export default loginSlice.reducer

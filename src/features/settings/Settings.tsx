@@ -2,7 +2,7 @@ import agent from 'api/agent'
 import { logout, selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import { saveUser, selectSettings, unload } from 'features/settings/settingsSlice'
+import { saveUser, selectSettings, pageUnload } from 'features/settings/settingsSlice'
 import { SaveUserRequest } from 'models/user'
 import React, {
   ChangeEventHandler,
@@ -18,10 +18,9 @@ type SettingsFormProps = {
 }
 
 const SettingsForm: FC<SettingsFormProps> = ({ onSubmitForm }) => {
+  const dispatch = useAppDispatch()
   const { currentUser } = useAppSelector(selectApp)
   const { inProgress } = useAppSelector(selectSettings)
-  const dispatch = useAppDispatch()
-
   const [user, setUser] = useState({
     image: currentUser?.image ?? 'https://static.productionready.io/images/smiley-cyrus.jpg',
     username: currentUser?.username ?? '',
@@ -53,7 +52,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ onSubmitForm }) => {
 
   useEffect(() => {
     return () => {
-      dispatch(unload())
+      dispatch(pageUnload())
     }
   }, [dispatch])
 
@@ -125,10 +124,11 @@ const SettingsForm: FC<SettingsFormProps> = ({ onSubmitForm }) => {
 }
 
 const Settings: FC = () => {
-  const { errors } = useAppSelector(selectSettings)
   const dispatch = useAppDispatch()
+  const { errors } = useAppSelector(selectSettings)
 
   const onSubmitForm = (user: SaveUserRequest) => dispatch(saveUser(user))
+
   const clickLogout: MouseEventHandler = () => {
     window.localStorage.removeItem('jwt')
     agent.setToken(null)

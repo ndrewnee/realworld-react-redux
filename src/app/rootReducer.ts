@@ -3,6 +3,7 @@ import { connectRouter } from 'connected-react-router'
 import login from 'features/login/loginSlice'
 import register from 'features/register/registerSlice'
 import settings from 'features/settings/settingsSlice'
+import editor from 'features/editor/editorSlice'
 import { History } from 'history'
 
 const createRootReducer = (history: History) => ({
@@ -10,6 +11,7 @@ const createRootReducer = (history: History) => ({
   login,
   register,
   settings,
+  editor,
   router: connectRouter(history),
 })
 

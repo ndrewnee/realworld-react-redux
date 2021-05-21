@@ -19,7 +19,7 @@ const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    unload: () => initialState,
+    pageUnload: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -38,6 +38,6 @@ const settingsSlice = createSlice({
 })
 
 export const selectSettings = (state: RootState) => state.settings
-export const { unload } = settingsSlice.actions
+export const { pageUnload } = settingsSlice.actions
 
 export default settingsSlice.reducer

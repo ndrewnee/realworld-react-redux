@@ -1,3 +1,4 @@
+import { Article, GetArticleResponse } from 'models/article'
 import {
   GetUserResponse,
   LoginRequest,
@@ -32,20 +33,19 @@ const makeRequest = async (req: superagent.Request) => {
 }
 
 const requests = {
-  del: (url: string) => superagent.del(`${API_ROOT}${url}`).use(tokenPlugin),
-  get: (url: string) => superagent.get(`${API_ROOT}${url}`).use(tokenPlugin),
-  put: (url: string, body: any) => superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin),
-  post: (url: string, body: any) => superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin),
+  del: (url: string) => makeRequest(superagent.del(`${API_ROOT}${url}`).use(tokenPlugin)),
+  get: (url: string) => makeRequest(superagent.get(`${API_ROOT}${url}`).use(tokenPlugin)),
+  put: (url: string, body: any) =>
+    makeRequest(superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin)),
+  post: (url: string, body: any) =>
+    makeRequest(superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin)),
 }
 
 const Auth = {
-  current: (): Promise<GetUserResponse> => makeRequest(requests.get('/user')),
-  login: (user: LoginRequest): Promise<LoginResponse> =>
-    makeRequest(requests.post('/users/login', { user })),
-  register: (user: RegisterRequest): Promise<RegisterResponse> =>
-    makeRequest(requests.post('/users', { user })),
-  save: (user: SaveUserRequest): Promise<SaveUserResponse> =>
-    makeRequest(requests.put('/user', { user })),
+  current: (): Promise<GetUserResponse> => requests.get('/user'),
+  login: (user: LoginRequest): Promise<LoginResponse> => requests.post('/users/login', { user }),
+  register: (user: RegisterRequest): Promise<RegisterResponse> => requests.post('/users', { user }),
+  save: (user: SaveUserRequest): Promise<SaveUserResponse> => requests.put('/user', { user }),
 }
 
 const Tags = {
@@ -54,7 +54,7 @@ const Tags = {
 
 const encode = encodeURIComponent
 const limit = (count: number, page: number) => `limit=${count}&offset=${page ? page * count : 0}`
-const omitSlug = (article: any) => ({ ...article, slug: undefined })
+const omitSlug = (article: Article) => ({ ...article, slug: undefined })
 
 const Articles = {
   all: (page: number) => requests.get(`/articles?${limit(10, page)}`),
@@ -67,11 +67,11 @@ const Articles = {
   favoritedBy: (author: string | number | boolean, page: number) =>
     requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
   feed: () => requests.get('/articles/feed?limit=10&offset=0'),
-  get: (slug: string) => requests.get(`/articles/${slug}`),
+  get: (slug: string): Promise<GetArticleResponse> => requests.get(`/articles/${slug}`),
   unfavorite: (slug: string) => requests.del(`/articles/${slug}/favorite`),
-  update: (article: { slug: string }) =>
+  update: (article: Article) =>
     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
-  create: (article: any) => requests.post('/articles', { article }),
+  create: (article: Article) => requests.post('/articles', { article }),
 }
 
 const Comments = {

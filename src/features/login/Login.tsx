@@ -1,13 +1,12 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import { auth, selectLogin, unload } from 'features/login/loginSlice'
+import { auth, selectLogin, pageUnload } from 'features/login/loginSlice'
 import React, { ChangeEventHandler, FC, FormEventHandler, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Login: FC = () => {
-  const { inProgress, errors } = useAppSelector(selectLogin)
   const dispatch = useAppDispatch()
-
+  const { inProgress, errors } = useAppSelector(selectLogin)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -25,7 +24,7 @@ const Login: FC = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(unload())
+      dispatch(pageUnload())
     }
   }, [dispatch])
 

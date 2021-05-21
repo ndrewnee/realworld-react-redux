@@ -28,7 +28,7 @@ const registerSlice = createSlice({
   name: 'register',
   initialState,
   reducers: {
-    unload: () => initialState,
+    pageUnload: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -46,7 +46,7 @@ const registerSlice = createSlice({
   },
 })
 
-export const { unload } = registerSlice.actions
+export const { pageUnload } = registerSlice.actions
 export const selectRegister = (state: RootState) => state.register
 
 export default registerSlice.reducer
