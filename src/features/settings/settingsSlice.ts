@@ -22,17 +22,18 @@ const settingsSlice = createSlice({
     unload: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(saveUser.pending, (state) => {
-      state.inProgress = true
-    })
-    builder.addCase(saveUser.fulfilled, (state, { payload }) => {
-      state.errors = payload.errors
-      state.inProgress = false
-    })
-    builder.addCase(saveUser.rejected, (state, action) => {
-      state.errors = { [action.error.name!]: action.error.message! }
-      state.inProgress = false
-    })
+    builder
+      .addCase(saveUser.pending, (state) => {
+        state.inProgress = true
+      })
+      .addCase(saveUser.fulfilled, (state, { payload }) => {
+        state.errors = payload.errors
+        state.inProgress = false
+      })
+      .addCase(saveUser.rejected, (state, action) => {
+        state.errors = { [action.error.name!]: action.error.message! }
+        state.inProgress = false
+      })
   },
 })
 

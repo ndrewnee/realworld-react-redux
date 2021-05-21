@@ -31,17 +31,18 @@ const loginSlice = createSlice({
     unload: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(auth.pending, (state) => {
-      state.inProgress = true
-    })
-    builder.addCase(auth.fulfilled, (state, { payload }) => {
-      state.errors = payload.errors
-      state.inProgress = false
-    })
-    builder.addCase(auth.rejected, (state, action) => {
-      state.errors = { [action.error.name!]: action.error.message! }
-      state.inProgress = false
-    })
+    builder
+      .addCase(auth.pending, (state) => {
+        state.inProgress = true
+      })
+      .addCase(auth.fulfilled, (state, { payload }) => {
+        state.errors = payload.errors
+        state.inProgress = false
+      })
+      .addCase(auth.rejected, (state, action) => {
+        state.errors = { [action.error.name!]: action.error.message! }
+        state.inProgress = false
+      })
   },
 })
 
