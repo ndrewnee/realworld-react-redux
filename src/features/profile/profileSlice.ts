@@ -13,6 +13,12 @@ export const pageLoad = createAsyncThunk('profile/pageLoad', async (username: st
   Promise.all([agent.Profile.get(username), agent.Articles.byAuthor(username, 0)]),
 )
 
+export const favoritesPageLoad = createAsyncThunk(
+  'profile/favoritesPageLoad',
+  async (username: string) =>
+    Promise.all([agent.Profile.get(username), agent.Articles.favoritedBy(username, 0)]),
+)
+
 export const followUser = createAsyncThunk('profile/followUser', agent.Profile.follow)
 
 export const unfollowUser = createAsyncThunk('profile/unfollowUser', agent.Profile.unfollow)
@@ -25,6 +31,9 @@ const profileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(pageLoad.fulfilled, (state, { payload }) => {
+      state.profile = payload[0].profile
+    })
+    builder.addCase(favoritesPageLoad.fulfilled, (state, { payload }) => {
       state.profile = payload[0].profile
     })
     builder.addCase(followUser.fulfilled, (state, { payload }) => {

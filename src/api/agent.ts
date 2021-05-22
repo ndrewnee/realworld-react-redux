@@ -57,7 +57,7 @@ const Articles = {
     requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
   del: (slug: string) => requests.del(`/articles/${slug}`),
   favorite: (slug: string): Promise<ArticleResponse> => requests.post(`/articles/${slug}/favorite`),
-  favoritedBy: (author: string, page: number) =>
+  favoritedBy: (author: string, page: number): Promise<ArticleListResponse> =>
     requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
   feed: () => requests.get('/articles/feed?limit=10&offset=0'),
   get: (slug: string): Promise<ArticleResponse> => requests.get(`/articles/${slug}`),

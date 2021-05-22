@@ -1,4 +1,4 @@
-import { pageLoad } from 'features/profile/profileSlice'
+import { favoritesPageLoad } from 'features/profile/profileSlice'
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import ProfileGeneral from './ProfileGeneral'
@@ -10,8 +10,8 @@ type Props = {
   username: string
 }>
 
-const Profile: React.FC<Props> = (props) => {
-  return <ProfileGeneral pageLoad={pageLoad} {...props} />
+const ProfileFavorites: React.FC<Props> = (props) => {
+  return <ProfileGeneral isFavorite={true} pageLoad={favoritesPageLoad} {...props} />
 }
 
-export default Profile
+export default ProfileFavorites

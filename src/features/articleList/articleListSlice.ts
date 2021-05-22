@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import agent from 'api/agent'
 import { RootState } from 'app/store'
-import { pageLoad as profilePageLoad } from 'features/profile/profileSlice'
+import { pageLoad as profilePageLoad, favoritesPageLoad } from 'features/profile/profileSlice'
 import { Article } from 'models/article'
 
 interface ArticleListState {
@@ -29,6 +29,10 @@ const articleListSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(profilePageLoad.fulfilled, (state, { payload }) => {
+      state.articles = payload[1].articles
+      state.articlesCount = payload[1].articlesCount
+    })
+    builder.addCase(favoritesPageLoad.fulfilled, (state, { payload }) => {
       state.articles = payload[1].articles
       state.articlesCount = payload[1].articlesCount
     })
