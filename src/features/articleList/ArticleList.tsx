@@ -1,16 +1,17 @@
+import { useAppSelector } from 'app/hooks'
 import ArticlePreview from 'features/articleList/ArticlePreview'
 import ListPagination from 'features/articleList/ListPagination'
-import { Article } from 'models/article'
 import React from 'react'
+import { selectArticleList } from 'features/articleList/articleListSlice'
 
 interface Props {
-  articles: Article[]
-  articlesCount: number
   currentPage: number
   pager?: (page: number) => void
 }
 
-const ArticleList: React.FC<Props> = ({ articles, articlesCount, currentPage, pager }) => {
+const ArticleList: React.FC<Props> = ({ currentPage, pager }) => {
+  const { articles, articlesCount } = useAppSelector(selectArticleList)
+
   if (!articles) {
     return <div className="article-preview">Loading...</div>
   }

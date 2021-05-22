@@ -44,8 +44,7 @@ const Editor: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
     setTagInput(event.target.value)
 
   const watchForEnter: KeyboardEventHandler = (event) => {
-    const returnKey = 13
-    if (event.keyCode === returnKey) {
+    if (event.key === 'Enter') {
       event.preventDefault()
       onAddTag()
     }

@@ -74,12 +74,11 @@ interface MatchParams {
 const Profile: React.FC<Props & RouteComponentProps<MatchParams>> = ({
   match,
   pager,
-  articles,
-  articlesCount,
   currentPage,
 }) => {
   const dispatch = useAppDispatch()
   const { currentUser } = useAppSelector(selectApp)
+  const { profile } = useAppSelector(selectProfile)
 
   const onFollow = (username: string) => {
     dispatch(followUser(username))
@@ -98,8 +97,6 @@ const Profile: React.FC<Props & RouteComponentProps<MatchParams>> = ({
       dispatch(pageUnload())
     }
   }, [dispatch])
-
-  const { profile } = useAppSelector(selectProfile)
 
   if (!profile) {
     return null
@@ -156,12 +153,7 @@ const Profile: React.FC<Props & RouteComponentProps<MatchParams>> = ({
           <div className="col-xs-12 col-md-10 offset-md-1">
             <div className="articles-toggle">{renderTabs()}</div>
 
-            <ArticleList
-              pager={pager}
-              articles={articles}
-              articlesCount={articlesCount}
-              currentPage={currentPage}
-            />
+            <ArticleList pager={pager} currentPage={currentPage} />
           </div>
         </div>
       </div>

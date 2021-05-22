@@ -56,12 +56,13 @@ const Articles = {
   byTag: (tag: string, page: number) =>
     requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
   del: (slug: string) => requests.del(`/articles/${slug}`),
-  favorite: (slug: string) => requests.post(`/articles/${slug}/favorite`, {}),
+  favorite: (slug: string): Promise<ArticleResponse> => requests.post(`/articles/${slug}/favorite`),
   favoritedBy: (author: string, page: number) =>
     requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
   feed: () => requests.get('/articles/feed?limit=10&offset=0'),
   get: (slug: string): Promise<ArticleResponse> => requests.get(`/articles/${slug}`),
-  unfavorite: (slug: string) => requests.del(`/articles/${slug}/favorite`),
+  unfavorite: (slug: string): Promise<ArticleResponse> =>
+    requests.del(`/articles/${slug}/favorite`),
   update: (article: ArticleEdit): Promise<ArticleResponse> =>
     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
   create: (article: ArticleEdit): Promise<ArticleResponse> =>

@@ -9,7 +9,7 @@ export interface Article {
   favorited: boolean
   favoritesCount: number
   author: User
-  createdAt: Date
+  createdAt: string
 }
 
 export interface ArticleResponse {
@@ -29,4 +29,5 @@ export interface ArticleEdit {
 
 export interface ArticleListResponse {
   articles: Article[]
+  articlesCount: number
 }

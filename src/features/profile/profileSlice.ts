@@ -4,18 +4,17 @@ import { RootState } from 'app/store'
 import { Profile } from 'models/profile'
 
 interface ProfileState {
-  profile: Profile | null
+  profile?: Profile
 }
 
-const initialState: ProfileState = {
-  profile: null,
-}
+const initialState: ProfileState = {}
 
 export const pageLoad = createAsyncThunk('profile/pageLoad', async (username: string) =>
-  Promise.all([agent.Profile.get(username), agent.Articles.byAuthor(username, 1)]),
+  Promise.all([agent.Profile.get(username), agent.Articles.byAuthor(username, 0)]),
 )
 
 export const followUser = createAsyncThunk('profile/followUser', agent.Profile.follow)
+
 export const unfollowUser = createAsyncThunk('profile/unfollowUser', agent.Profile.unfollow)
 
 const profileSlice = createSlice({

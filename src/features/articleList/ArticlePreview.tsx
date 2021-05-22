@@ -1,3 +1,5 @@
+import { useAppDispatch } from 'app/hooks'
+import { favoriteArticle, unfavoriteArticle } from 'features/articleList/articleListSlice'
 import { Article } from 'models/article'
 import React, { MouseEventHandler } from 'react'
 import { Link } from 'react-router-dom'
@@ -10,14 +12,16 @@ interface Props {
 }
 
 const ArticlePreview: React.FC<Props> = ({ article }) => {
+  const dispatch = useAppDispatch()
+
   const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS
 
   const handleClick: MouseEventHandler = (event) => {
     event.preventDefault()
     if (article.favorited) {
-      // unfavorite(article.slug!)
+      dispatch(unfavoriteArticle(article.slug))
     } else {
-      // favorite(article.slug!)
+      dispatch(favoriteArticle(article.slug))
     }
   }
 
@@ -27,7 +31,7 @@ const ArticlePreview: React.FC<Props> = ({ article }) => {
         <Link to={`/@${article.author.username}`}>
           <img
             src={
-              article.author.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'
+              article.author.image ?? 'https://static.productionready.io/images/smiley-cyrus.jpg'
             }
             alt={article.author.username}
           />
