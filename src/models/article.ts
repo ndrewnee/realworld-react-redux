@@ -6,7 +6,7 @@ export interface Article {
   tagList: string[]
 }
 
-export interface GetArticleResponse {
+export interface ArticleResponse {
   article?: Article
   errors?: {
     [k: string]: string

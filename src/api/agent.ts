@@ -1,13 +1,5 @@
-import { Article, GetArticleResponse } from 'models/article'
-import {
-  GetUserResponse,
-  LoginRequest,
-  LoginResponse,
-  RegisterRequest,
-  RegisterResponse,
-  SaveUserRequest,
-  SaveUserResponse,
-} from 'models/user'
+import { Article, ArticleResponse } from 'models/article'
+import { LoginRequest, RegisterRequest, SaveUserRequest, UserResponse } from 'models/user'
 import superagent from 'superagent'
 
 const API_ROOT = process.env.REACT_APP_BACKEND_URL || 'https://conduit.productionready.io/api'
@@ -42,10 +34,10 @@ const requests = {
 }
 
 const Auth = {
-  current: (): Promise<GetUserResponse> => requests.get('/user'),
-  login: (user: LoginRequest): Promise<LoginResponse> => requests.post('/users/login', { user }),
-  register: (user: RegisterRequest): Promise<RegisterResponse> => requests.post('/users', { user }),
-  save: (user: SaveUserRequest): Promise<SaveUserResponse> => requests.put('/user', { user }),
+  current: (): Promise<UserResponse> => requests.get('/user'),
+  login: (user: LoginRequest): Promise<UserResponse> => requests.post('/users/login', { user }),
+  register: (user: RegisterRequest): Promise<UserResponse> => requests.post('/users', { user }),
+  save: (user: SaveUserRequest): Promise<UserResponse> => requests.put('/user', { user }),
 }
 
 const Tags = {
@@ -67,11 +59,11 @@ const Articles = {
   favoritedBy: (author: string | number | boolean, page: number) =>
     requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
   feed: () => requests.get('/articles/feed?limit=10&offset=0'),
-  get: (slug: string): Promise<GetArticleResponse> => requests.get(`/articles/${slug}`),
+  get: (slug: string): Promise<ArticleResponse> => requests.get(`/articles/${slug}`),
   unfavorite: (slug: string) => requests.del(`/articles/${slug}/favorite`),
-  update: (article: Article) =>
+  update: (article: Article): Promise<ArticleResponse> =>
     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
-  create: (article: Article) => requests.post('/articles', { article }),
+  create: (article: Article): Promise<ArticleResponse> => requests.post('/articles', { article }),
 }
 
 const Comments = {

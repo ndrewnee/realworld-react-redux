@@ -4,6 +4,7 @@ import { RootState } from 'app/store'
 import { auth } from 'features/login/loginSlice'
 import { signup } from 'features/register/registerSlice'
 import { saveUser } from 'features/settings/settingsSlice'
+import { submitArticle } from 'features/editor/editorSlice'
 import { User } from 'models/user'
 
 interface AppState {
@@ -56,6 +57,10 @@ const appSlice = createSlice({
       })
       .addCase(saveUser.fulfilled, (state, { payload }) => {
         state.redirectTo = payload.errors ? null : '/'
+      })
+      .addCase(submitArticle.fulfilled, (state, { payload }) => {
+        const redirectUrl = payload.article ? `/article/${payload.article.slug}` : null
+        state.redirectTo = redirectUrl
       })
   },
 })

@@ -6,20 +6,16 @@ export interface User {
   token: string
 }
 
-export interface GetUserResponse {
-  user: User
+export interface UserResponse {
+  user?: User
+  errors?: {
+    [k: string]: string
+  }
 }
 
 export interface LoginRequest {
   email: string
   password: string
-}
-
-export interface LoginResponse {
-  user?: User
-  errors?: {
-    [k: string]: string
-  }
 }
 
 export interface RegisterRequest {
@@ -28,24 +24,10 @@ export interface RegisterRequest {
   password: string
 }
 
-export interface RegisterResponse {
-  user?: User
-  errors?: {
-    [k: string]: string
-  }
-}
-
 export interface SaveUserRequest {
   username: string
   email: string
   password?: string
   bio?: string
   image?: string
-}
-
-export interface SaveUserResponse {
-  user?: User
-  errors?: {
-    [k: string]: string
-  }
 }
