@@ -3,9 +3,10 @@ import React, { MouseEventHandler } from 'react'
 interface Props {
   articlesCount: number
   currentPage: number
+  pager?: (page: number) => void
 }
 
-const ListPagination: React.FC<Props> = ({ articlesCount, currentPage }) => {
+const ListPagination: React.FC<Props> = ({ articlesCount, currentPage, pager }) => {
   if (articlesCount <= 10) {
     return null
   }
@@ -15,7 +16,13 @@ const ListPagination: React.FC<Props> = ({ articlesCount, currentPage }) => {
     range.push(i)
   }
 
-  const setPage = (page: number) => {}
+  const setPage = (page: number) => {
+    if (pager) {
+      // onSetPage(page, pager(page))
+    } else {
+      // onSetPage(page, agent.Articles.all(page))
+    }
+  }
 
   return (
     <nav>

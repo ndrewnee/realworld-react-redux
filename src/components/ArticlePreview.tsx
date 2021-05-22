@@ -7,19 +7,17 @@ const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary'
 
 interface Props {
   article: Article
-  favorite: (slug: string) => void
-  unfavorite: (slug: string) => void
 }
 
-const ArticlePreview: React.FC<Props> = ({ article, favorite, unfavorite }) => {
+const ArticlePreview: React.FC<Props> = ({ article }) => {
   const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS
 
   const handleClick: MouseEventHandler = (event) => {
     event.preventDefault()
     if (article.favorited) {
-      unfavorite(article.slug!)
+      // unfavorite(article.slug!)
     } else {
-      favorite(article.slug!)
+      // favorite(article.slug!)
     }
   }
 
