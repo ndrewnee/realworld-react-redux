@@ -1,4 +1,5 @@
-import { ArticleEdit, ArticleResponse } from 'models/article'
+import { ArticleEdit, ArticleListResponse, ArticleResponse } from 'models/article'
+import { ProfileResponse } from 'models/profile'
 import { LoginRequest, RegisterRequest, SaveUserRequest, UserResponse } from 'models/user'
 import superagent from 'superagent'
 
@@ -27,9 +28,9 @@ const makeRequest = async (req: superagent.Request) => {
 const requests = {
   del: (url: string) => makeRequest(superagent.del(`${API_ROOT}${url}`).use(tokenPlugin)),
   get: (url: string) => makeRequest(superagent.get(`${API_ROOT}${url}`).use(tokenPlugin)),
-  put: (url: string, body: any) =>
+  put: (url: string, body?: any) =>
     makeRequest(superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin)),
-  post: (url: string, body: any) =>
+  post: (url: string, body?: any) =>
     makeRequest(superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin)),
 }
 
@@ -50,13 +51,13 @@ const omitSlug = (article: ArticleEdit) => ({ ...article, slug: undefined })
 
 const Articles = {
   all: (page: number) => requests.get(`/articles?${limit(10, page)}`),
-  byAuthor: (author: string | number | boolean, page: number) =>
+  byAuthor: (author: string, page: number): Promise<ArticleListResponse> =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
-  byTag: (tag: string | number | boolean, page: number) =>
+  byTag: (tag: string, page: number) =>
     requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
   del: (slug: string) => requests.del(`/articles/${slug}`),
   favorite: (slug: string) => requests.post(`/articles/${slug}/favorite`, {}),
-  favoritedBy: (author: string | number | boolean, page: number) =>
+  favoritedBy: (author: string, page: number) =>
     requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
   feed: () => requests.get('/articles/feed?limit=10&offset=0'),
   get: (slug: string): Promise<ArticleResponse> => requests.get(`/articles/${slug}`),
@@ -76,9 +77,11 @@ const Comments = {
 }
 
 const Profile = {
-  follow: (username: string) => requests.post(`/profiles/${username}/follow`, {}),
-  get: (username: string) => requests.get(`/profiles/${username}`),
-  unfollow: (username: string) => requests.del(`/profiles/${username}/follow`),
+  follow: (username: string): Promise<ProfileResponse> =>
+    requests.post(`/profiles/${username}/follow`),
+  get: (username: string): Promise<ProfileResponse> => requests.get(`/profiles/${username}`),
+  unfollow: (username: string): Promise<ProfileResponse> =>
+    requests.del(`/profiles/${username}/follow`),
 }
 
 const agent = {

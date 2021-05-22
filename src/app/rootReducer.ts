@@ -4,6 +4,7 @@ import login from 'features/login/loginSlice'
 import register from 'features/register/registerSlice'
 import settings from 'features/settings/settingsSlice'
 import editor from 'features/editor/editorSlice'
+import profile from 'features/profile/profileSlice'
 import { History } from 'history'
 
 const createRootReducer = (history: History) => ({
@@ -12,6 +13,7 @@ const createRootReducer = (history: History) => ({
   register,
   settings,
   editor,
+  profile,
   router: connectRouter(history),
 })
 

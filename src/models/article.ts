@@ -26,3 +26,7 @@ export interface ArticleEdit {
   body: string
   tagList: string[]
 }
+
+export interface ArticleListResponse {
+  articles: Article[]
+}

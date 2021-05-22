@@ -1,5 +1,5 @@
-import ArticlePreview from 'components/ArticlePreview'
-import ListPagination from 'components/ListPagination'
+import ArticlePreview from 'features/articleList/ArticlePreview'
+import ListPagination from 'features/articleList/ListPagination'
 import { Article } from 'models/article'
 import React from 'react'
 

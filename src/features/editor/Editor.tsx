@@ -17,11 +17,11 @@ import React, {
 } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
-interface Props {
+interface MatchParams {
   slug: string
 }
 
-const Editor: React.FC<RouteComponentProps<Props>> = ({ match }) => {
+const Editor: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const dispatch = useAppDispatch()
   const [tagInput, setTagInput] = useState('')
   const { slug, title, description, body, tagList, inProgress, errors } =

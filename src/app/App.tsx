@@ -8,6 +8,7 @@ import Settings from 'features/settings/Settings'
 import Editor from 'features/editor/Editor'
 import React, { Suspense, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import Profile from 'features/profile/Profile'
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -42,6 +43,7 @@ const App: React.FC = () => {
           <Route path="/settings" component={Settings} />
           <Route path="/editor/:slug" component={Editor} />
           <Route path="/editor" component={Editor} />
+          <Route path="/@:username" component={Profile} />
         </Switch>
       </Suspense>
     </div>
