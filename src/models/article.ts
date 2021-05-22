@@ -1,9 +1,15 @@
+import { User } from './user'
+
 export interface Article {
-  slug?: string
+  slug: string
   title: string
   description: string
   body: string
   tagList: string[]
+  favorited: boolean
+  favoritesCount: number
+  author: User
+  createdAt: Date
 }
 
 export interface ArticleResponse {
@@ -11,4 +17,12 @@ export interface ArticleResponse {
   errors?: {
     [k: string]: string
   }
+}
+
+export interface ArticleEdit {
+  slug?: string
+  title: string
+  description: string
+  body: string
+  tagList: string[]
 }

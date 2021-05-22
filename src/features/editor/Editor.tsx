@@ -7,6 +7,7 @@ import {
   submitArticle,
   updateField,
 } from 'features/editor/editorSlice'
+import { ArticleEdit } from 'models/article'
 import React, {
   ChangeEventHandler,
   FC,
@@ -17,11 +18,11 @@ import React, {
 } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
-interface EditorProps {
+interface Props {
   slug: string
 }
 
-const Editor: FC<RouteComponentProps<EditorProps>> = ({ match }) => {
+const Editor: FC<RouteComponentProps<Props>> = ({ match }) => {
   const dispatch = useAppDispatch()
   const [tagInput, setTagInput] = useState('')
   const { slug, title, description, body, tagList, inProgress, errors } =
@@ -63,8 +64,8 @@ const Editor: FC<RouteComponentProps<EditorProps>> = ({ match }) => {
   const submitForm: FormEventHandler = (event) => {
     event.preventDefault()
 
-    const article = {
-      slug: slug || undefined,
+    const article: ArticleEdit = {
+      slug: slug!,
       title: title,
       description: description,
       body: body,

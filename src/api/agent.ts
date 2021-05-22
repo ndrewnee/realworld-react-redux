@@ -1,4 +1,4 @@
-import { Article, ArticleResponse } from 'models/article'
+import { ArticleEdit, ArticleResponse } from 'models/article'
 import { LoginRequest, RegisterRequest, SaveUserRequest, UserResponse } from 'models/user'
 import superagent from 'superagent'
 
@@ -46,7 +46,7 @@ const Tags = {
 
 const encode = encodeURIComponent
 const limit = (count: number, page: number) => `limit=${count}&offset=${page ? page * count : 0}`
-const omitSlug = (article: Article) => ({ ...article, slug: undefined })
+const omitSlug = (article: ArticleEdit) => ({ ...article, slug: undefined })
 
 const Articles = {
   all: (page: number) => requests.get(`/articles?${limit(10, page)}`),
@@ -61,9 +61,10 @@ const Articles = {
   feed: () => requests.get('/articles/feed?limit=10&offset=0'),
   get: (slug: string): Promise<ArticleResponse> => requests.get(`/articles/${slug}`),
   unfavorite: (slug: string) => requests.del(`/articles/${slug}/favorite`),
-  update: (article: Article): Promise<ArticleResponse> =>
+  update: (article: ArticleEdit): Promise<ArticleResponse> =>
     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
-  create: (article: Article): Promise<ArticleResponse> => requests.post('/articles', { article }),
+  create: (article: ArticleEdit): Promise<ArticleResponse> =>
+    requests.post('/articles', { article }),
 }
 
 const Comments = {
