@@ -2,13 +2,13 @@ import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { pageUnload, selectSettings } from 'features/settings/settingsSlice'
 import { SaveUserRequest } from 'models/user'
-import { ChangeEventHandler, FC, FormEventHandler, useEffect, useState } from 'react'
+import { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react'
 
 interface Props {
   onSubmitForm: (user: SaveUserRequest) => void
 }
 
-const SettingsForm: FC<Props> = ({ onSubmitForm }) => {
+const SettingsForm: React.FC<Props> = ({ onSubmitForm }) => {
   const dispatch = useAppDispatch()
   const { currentUser } = useAppSelector(selectApp)
   const { inProgress } = useAppSelector(selectSettings)

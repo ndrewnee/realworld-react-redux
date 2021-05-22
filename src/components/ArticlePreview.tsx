@@ -1,5 +1,5 @@
 import { Article } from 'models/article'
-import React, { FC, MouseEventHandler } from 'react'
+import React, { MouseEventHandler } from 'react'
 import { Link } from 'react-router-dom'
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary'
@@ -11,7 +11,7 @@ interface Props {
   unfavorite: (slug: string) => void
 }
 
-const ArticlePreview: FC<Props> = ({ article, favorite, unfavorite }) => {
+const ArticlePreview: React.FC<Props> = ({ article, favorite, unfavorite }) => {
   const favoriteButtonClass = article.favorited ? FAVORITED_CLASS : NOT_FAVORITED_CLASS
 
   const handleClick: MouseEventHandler = (event) => {

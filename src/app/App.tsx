@@ -6,10 +6,10 @@ import Login from 'features/login/Login'
 import Register from 'features/register/Register'
 import Settings from 'features/settings/Settings'
 import Editor from 'features/editor/Editor'
-import React, { FC, Suspense, useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-const App: FC = () => {
+const App: React.FC = () => {
   const dispatch = useAppDispatch()
   const { appLoaded, currentUser, redirectTo } = useAppSelector(selectApp)
 

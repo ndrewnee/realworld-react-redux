@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 interface Props {
   errors?: {
@@ -6,7 +6,7 @@ interface Props {
   }
 }
 
-const ListErrors: FC<Props> = ({ errors }) => {
+const ListErrors: React.FC<Props> = ({ errors }) => {
   if (!errors) {
     return null
   }

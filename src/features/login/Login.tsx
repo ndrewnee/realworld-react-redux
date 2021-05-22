@@ -4,7 +4,7 @@ import { auth, selectLogin, pageUnload } from 'features/login/loginSlice'
 import React, { ChangeEventHandler, FC, FormEventHandler, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Login: FC = () => {
+const Login: React.FC = () => {
   const dispatch = useAppDispatch()
   const { inProgress, errors } = useAppSelector(selectLogin)
   const [email, setEmail] = useState('')

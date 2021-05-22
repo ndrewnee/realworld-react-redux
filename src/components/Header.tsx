@@ -1,12 +1,12 @@
 import { User } from 'models/user'
-import React, { FC } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 interface Props {
   currentUser: User | null
 }
 
-const LoggedOutUnmemoized: FC<Props> = ({ currentUser }) => {
+const LoggedOutUnmemoized: React.FC<Props> = ({ currentUser }) => {
   if (currentUser) {
     return null
   }
@@ -36,7 +36,7 @@ const LoggedOutUnmemoized: FC<Props> = ({ currentUser }) => {
 
 const LoggedOut = React.memo(LoggedOutUnmemoized)
 
-const LoggedInUnmemoized: FC<Props> = ({ currentUser }) => {
+const LoggedInUnmemoized: React.FC<Props> = ({ currentUser }) => {
   if (!currentUser) {
     return null
   }
@@ -77,7 +77,7 @@ const LoggedInUnmemoized: FC<Props> = ({ currentUser }) => {
 
 const LoggedIn = React.memo(LoggedInUnmemoized)
 
-const Header: FC<Props> = ({ currentUser }) => {
+const Header: React.FC<Props> = ({ currentUser }) => {
   return (
     <nav className="navbar navbar-light">
       <div className="container">

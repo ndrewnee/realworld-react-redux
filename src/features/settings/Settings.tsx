@@ -2,12 +2,12 @@ import agent from 'api/agent'
 import { logout } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import { saveUser, selectSettings } from 'features/settings/settingsSlice'
 import SettingsForm from 'features/settings/SettingsForm'
+import { saveUser, selectSettings } from 'features/settings/settingsSlice'
 import { SaveUserRequest } from 'models/user'
-import React, { FC, MouseEventHandler } from 'react'
+import React, { MouseEventHandler } from 'react'
 
-const Settings: FC = () => {
+const Settings: React.FC = () => {
   const dispatch = useAppDispatch()
   const { errors } = useAppSelector(selectSettings)
 

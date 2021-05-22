@@ -10,7 +10,6 @@ import {
 import { ArticleEdit } from 'models/article'
 import React, {
   ChangeEventHandler,
-  FC,
   FormEventHandler,
   KeyboardEventHandler,
   useEffect,
@@ -22,7 +21,7 @@ interface Props {
   slug: string
 }
 
-const Editor: FC<RouteComponentProps<Props>> = ({ match }) => {
+const Editor: React.FC<RouteComponentProps<Props>> = ({ match }) => {
   const dispatch = useAppDispatch()
   const [tagInput, setTagInput] = useState('')
   const { slug, title, description, body, tagList, inProgress, errors } =

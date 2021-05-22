@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
 import { selectRegister, signup, pageUnload } from 'features/register/registerSlice'
-import React, { ChangeEventHandler, FC, FormEventHandler, useEffect, useState } from 'react'
+import React, { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Register: FC = () => {
+const Register: React.FC = () => {
   const dispatch = useAppDispatch()
   const { inProgress, errors } = useAppSelector(selectRegister)
   const [username, setUsername] = useState('')

@@ -1,11 +1,11 @@
-import React, { FC, MouseEventHandler } from 'react'
+import React, { MouseEventHandler } from 'react'
 
 interface Props {
   articlesCount: number
   currentPage: number
 }
 
-const ListPagination: FC<Props> = ({ articlesCount, currentPage }) => {
+const ListPagination: React.FC<Props> = ({ articlesCount, currentPage }) => {
   if (articlesCount <= 10) {
     return null
   }
