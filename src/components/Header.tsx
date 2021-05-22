@@ -6,7 +6,7 @@ interface Props {
   currentUser: User | null
 }
 
-const LoggedOutUnmemoized: React.FC<Props> = ({ currentUser }) => {
+const LoggedOut: React.NamedExoticComponent<Props> = React.memo(({ currentUser }) => {
   if (currentUser) {
     return null
   }
@@ -32,11 +32,9 @@ const LoggedOutUnmemoized: React.FC<Props> = ({ currentUser }) => {
       </li>
     </ul>
   )
-}
+})
 
-const LoggedOut = React.memo(LoggedOutUnmemoized)
-
-const LoggedInUnmemoized: React.FC<Props> = ({ currentUser }) => {
+const LoggedIn: React.NamedExoticComponent<Props> = React.memo(({ currentUser }) => {
   if (!currentUser) {
     return null
   }
@@ -73,9 +71,7 @@ const LoggedInUnmemoized: React.FC<Props> = ({ currentUser }) => {
       </li>
     </ul>
   )
-}
-
-const LoggedIn = React.memo(LoggedInUnmemoized)
+})
 
 const Header: React.FC<Props> = ({ currentUser }) => {
   return (
