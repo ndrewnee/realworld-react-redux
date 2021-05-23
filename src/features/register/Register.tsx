@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import { selectRegister, signup, pageUnload } from 'features/register/registerSlice'
+import { selectRegister, signup, pageUnload } from './registerSlice'
 import React, { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 

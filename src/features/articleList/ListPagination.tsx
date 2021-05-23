@@ -1,9 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import {
-  articlesByPage,
-  changePage,
-  selectArticleList,
-} from 'features/articleList/articleListSlice'
+import { articlesByPage, changePage, selectArticleList } from './articleListSlice'
 import React, { MouseEventHandler } from 'react'
 
 const ListPagination: React.FC<{}> = () => {

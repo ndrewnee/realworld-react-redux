@@ -1,10 +1,10 @@
 import api from 'api'
 import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import Banner from 'features/home/Banner'
-import { changeTab, pageLoad, pageUnload } from 'features/home/homeSlice'
-import MainView from 'features/home/MainView'
-import Tags from 'features/home/Tags'
+import Banner from './Banner'
+import { changeTab, pageLoad, pageUnload } from './homeSlice'
+import MainView from './MainView'
+import Tags from './Tags'
 import React, { useEffect } from 'react'
 
 const Home: React.FC<{}> = () => {

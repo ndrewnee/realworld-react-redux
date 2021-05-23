@@ -4,7 +4,7 @@ import { Profile, ProfileResponse } from 'api/profile'
 import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ArticleList from 'features/articleList/ArticleList'
-import { followUser, selectProfile, unfollowUser } from 'features/profile/profileSlice'
+import { followUser, selectProfile, unfollowUser } from './profileSlice'
 import React, { MouseEventHandler, NamedExoticComponent, useEffect } from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom'
 

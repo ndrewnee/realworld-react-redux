@@ -1,13 +1,7 @@
 import { ArticleEdit } from 'api/article'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import {
-  pageLoad,
-  pageUnload,
-  selectEditor,
-  submitArticle,
-  updateField,
-} from 'features/editor/editorSlice'
+import { pageLoad, pageUnload, selectEditor, submitArticle, updateField } from './editorSlice'
 import React, {
   ChangeEventHandler,
   FormEventHandler,

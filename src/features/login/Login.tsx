@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import { auth, selectLogin, pageUnload } from 'features/login/loginSlice'
+import { auth, selectLogin, pageUnload } from './loginSlice'
 import React, { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 

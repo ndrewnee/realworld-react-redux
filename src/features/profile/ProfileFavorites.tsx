@@ -1,4 +1,4 @@
-import { favoritesPageLoad } from 'features/profile/profileSlice'
+import { favoritesPageLoad } from './profileSlice'
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import ProfileGeneral from './ProfileGeneral'

@@ -1,12 +1,13 @@
-import app from 'app/appSlice'
+import app from './appSlice'
 import { connectRouter } from 'connected-react-router'
+import article from 'features/article/articleSlice'
+import articleList from 'features/articleList/articleListSlice'
+import editor from 'features/editor/editorSlice'
+import home from 'features/home/homeSlice'
 import login from 'features/login/loginSlice'
+import profile from 'features/profile/profileSlice'
 import register from 'features/register/registerSlice'
 import settings from 'features/settings/settingsSlice'
-import editor from 'features/editor/editorSlice'
-import profile from 'features/profile/profileSlice'
-import articleList from 'features/articleList/articleListSlice'
-import home from 'features/home/homeSlice'
 import { History } from 'history'
 
 const createReducer = (history: History) => ({
@@ -18,6 +19,7 @@ const createReducer = (history: History) => ({
   profile,
   articleList,
   home,
+  article,
   router: connectRouter(history),
 })
 

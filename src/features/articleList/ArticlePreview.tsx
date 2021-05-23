@@ -1,6 +1,6 @@
 import { Article } from 'api/article'
 import { useAppDispatch } from 'app/hooks'
-import { favoriteArticle, unfavoriteArticle } from 'features/articleList/articleListSlice'
+import { favoriteArticle, unfavoriteArticle } from './articleListSlice'
 import React, { MouseEventHandler } from 'react'
 import { Link } from 'react-router-dom'
 

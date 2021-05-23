@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { pageUnload, selectArticleList } from 'features/articleList/articleListSlice'
-import ArticlePreview from 'features/articleList/ArticlePreview'
-import ListPagination from 'features/articleList/ListPagination'
+import { pageUnload, selectArticleList } from './articleListSlice'
+import ArticlePreview from './ArticlePreview'
+import ListPagination from './ListPagination'
 import React, { useEffect } from 'react'
 
 interface Props {}

@@ -3,8 +3,8 @@ import { SaveUserRequest } from 'api/user'
 import { logout } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
-import SettingsForm from 'features/settings/SettingsForm'
-import { saveUser, selectSettings } from 'features/settings/settingsSlice'
+import SettingsForm from './SettingsForm'
+import { saveUser, selectSettings } from './settingsSlice'
 import React, { MouseEventHandler } from 'react'
 
 const Settings: React.FC = () => {

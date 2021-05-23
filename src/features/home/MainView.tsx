@@ -2,7 +2,7 @@ import api from 'api'
 import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ArticleList from 'features/articleList/ArticleList'
-import { articlesByTab, changeTab, selectHome } from 'features/home/homeSlice'
+import { articlesByTab, changeTab, selectHome } from './homeSlice'
 import React, { MouseEventHandler, NamedExoticComponent } from 'react'
 
 const YourFeedTab: NamedExoticComponent<{}> = React.memo(() => {

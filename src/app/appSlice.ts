@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import api from 'api'
 import { User } from 'api/user'
-import { RootState } from 'app/store'
+import { RootState } from './store'
 import { submitArticle } from 'features/editor/editorSlice'
 import { auth } from 'features/login/loginSlice'
 import { signup } from 'features/register/registerSlice'
@@ -21,7 +21,7 @@ const initialState: AppState = {
   token: null,
 }
 
-export const pageLoad = createAsyncThunk('app/pageLoad', async () => {
+export const pageLoad = createAsyncThunk('./pageLoad', async () => {
   const token = window.localStorage.getItem('jwt')
   if (token) {
     api.setToken(token)

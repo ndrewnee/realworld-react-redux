@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import createReducer from 'app/reducer'
+import createReducer from './reducer'
 import { routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 
