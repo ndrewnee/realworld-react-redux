@@ -21,7 +21,7 @@ const initialState: AppState = {
   token: null,
 }
 
-export const load = createAsyncThunk('app/load', async () => {
+export const pageLoad = createAsyncThunk('app/pageLoad', async () => {
   const token = window.localStorage.getItem('jwt')
   if (token) {
     api.setToken(token)
@@ -44,7 +44,7 @@ const appSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(load.fulfilled, (state, { payload }) => {
+      .addCase(pageLoad.fulfilled, (state, { payload }) => {
         state.appLoaded = true
         state.currentUser = payload?.user ?? null
         state.token = payload?.user?.token ?? null

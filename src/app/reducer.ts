@@ -6,9 +6,10 @@ import settings from 'features/settings/settingsSlice'
 import editor from 'features/editor/editorSlice'
 import profile from 'features/profile/profileSlice'
 import articleList from 'features/articleList/articleListSlice'
+import home from 'features/home/homeSlice'
 import { History } from 'history'
 
-const createRootReducer = (history: History) => ({
+const createReducer = (history: History) => ({
   app,
   login,
   register,
@@ -16,7 +17,8 @@ const createRootReducer = (history: History) => ({
   editor,
   profile,
   articleList,
+  home,
   router: connectRouter(history),
 })
 
-export default createRootReducer
+export default createReducer

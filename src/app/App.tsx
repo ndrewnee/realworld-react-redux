@@ -1,8 +1,9 @@
-import { load, redirect, selectApp } from 'app/appSlice'
+import { pageLoad, redirect, selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import Header from 'components/Header'
 import { push } from 'connected-react-router'
 import Editor from 'features/editor/Editor'
+import Home from 'features/home/Home'
 import Login from 'features/login/Login'
 import Profile from 'features/profile/Profile'
 import ProfileFavorites from 'features/profile/ProfileFavorites'
@@ -16,11 +17,11 @@ const App: React.FC = () => {
   const { appLoaded, currentUser, redirectTo } = useAppSelector(selectApp)
 
   useEffect(() => {
-    dispatch(load())
+    dispatch(pageLoad())
   }, [dispatch])
 
   useEffect(() => {
-    if (redirectTo != null) {
+    if (redirectTo) {
       dispatch(push(redirectTo))
       dispatch(redirect())
     }
@@ -39,6 +40,7 @@ const App: React.FC = () => {
       <Header currentUser={currentUser} />
       <Suspense fallback={<p>Loading...</p>}>
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/settings" component={Settings} />

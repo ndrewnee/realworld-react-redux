@@ -10,13 +10,13 @@ interface ProfileState {
 const initialState: ProfileState = {}
 
 export const pageLoad = createAsyncThunk('profile/pageLoad', async (username: string) =>
-  Promise.all([api.Profile.get(username), api.Articles.byAuthor(username, 0)]),
+  Promise.all([api.Profile.get(username), api.Articles.byAuthor(username)]),
 )
 
 export const favoritesPageLoad = createAsyncThunk(
   'profile/favoritesPageLoad',
   async (username: string) =>
-    Promise.all([api.Profile.get(username), api.Articles.favoritedBy(username, 0)]),
+    Promise.all([api.Profile.get(username), api.Articles.favoritedBy(username)]),
 )
 
 export const followUser = createAsyncThunk('profile/followUser', api.Profile.follow)

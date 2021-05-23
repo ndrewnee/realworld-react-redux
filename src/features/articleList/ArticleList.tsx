@@ -4,12 +4,9 @@ import ArticlePreview from 'features/articleList/ArticlePreview'
 import ListPagination from 'features/articleList/ListPagination'
 import React, { useEffect } from 'react'
 
-interface Props {
-  currentPage: number
-  pager?: (page: number) => void
-}
+interface Props {}
 
-const ArticleList: React.FC<Props> = ({ currentPage, pager }) => {
+const ArticleList: React.FC<Props> = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -18,7 +15,7 @@ const ArticleList: React.FC<Props> = ({ currentPage, pager }) => {
     }
   }, [dispatch])
 
-  const { articles, articlesCount } = useAppSelector(selectArticleList)
+  const { articles } = useAppSelector(selectArticleList)
 
   if (!articles) {
     return <div className="article-preview">Loading...</div>
@@ -34,7 +31,7 @@ const ArticleList: React.FC<Props> = ({ currentPage, pager }) => {
         return <ArticlePreview article={article} key={article.slug} />
       })}
 
-      <ListPagination pager={pager} articlesCount={articlesCount} currentPage={currentPage} />
+      <ListPagination />
     </div>
   )
 }

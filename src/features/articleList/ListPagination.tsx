@@ -1,12 +1,11 @@
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { articlesByPage, selectArticleList } from 'features/articleList/articleListSlice'
 import React, { MouseEventHandler } from 'react'
 
-interface Props {
-  articlesCount: number
-  currentPage: number
-  pager?: (page: number) => void
-}
+const ListPagination: React.FC<{}> = () => {
+  const dispatch = useAppDispatch()
+  const { articlesCount, currentPage, pager } = useAppSelector(selectArticleList)
 
-const ListPagination: React.FC<Props> = ({ articlesCount, currentPage, pager }) => {
   if (articlesCount <= 10) {
     return null
   }
@@ -17,11 +16,7 @@ const ListPagination: React.FC<Props> = ({ articlesCount, currentPage, pager }) 
   }
 
   const setPage = (page: number) => {
-    if (pager) {
-      // onSetPage(page, pager(page))
-    } else {
-      // onSetPage(page, agent.Articles.all(page))
-    }
+    dispatch(articlesByPage({ pager, page }))
   }
 
   return (

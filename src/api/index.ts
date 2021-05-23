@@ -2,6 +2,7 @@ import { ArticleEdit, ArticleListResponse, ArticleResponse } from 'api/article'
 import { ProfileResponse } from 'api/profile'
 import { LoginRequest, RegisterRequest, SaveUserRequest, UserResponse } from 'api/user'
 import superagent from 'superagent'
+import { TagsResponse } from './tag'
 
 const API_ROOT = process.env.REACT_APP_BACKEND_URL || 'https://conduit.productionready.io/api'
 let token: string | null = null
@@ -42,24 +43,25 @@ const Auth = {
 }
 
 const Tags = {
-  getAll: () => requests.get('/tags'),
+  getAll: (): Promise<TagsResponse> => requests.get('/tags'),
 }
 
 const encode = encodeURIComponent
-const limit = (count: number, page: number) => `limit=${count}&offset=${page ? page * count : 0}`
+const limit = (count: number, page?: number) => `limit=${count}&offset=${page ? page * count : 0}`
 const omitSlug = (article: ArticleEdit) => ({ ...article, slug: undefined })
 
 const Articles = {
-  all: (page: number) => requests.get(`/articles?${limit(10, page)}`),
-  byAuthor: (author: string, page: number): Promise<ArticleListResponse> =>
+  all: (page?: number): Promise<ArticleListResponse> =>
+    requests.get(`/articles?${limit(10, page)}`),
+  byAuthor: (author: string, page?: number): Promise<ArticleListResponse> =>
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
-  byTag: (tag: string, page: number) =>
+  byTag: (tag: string, page?: number): Promise<ArticleListResponse> =>
     requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
   del: (slug: string) => requests.del(`/articles/${slug}`),
   favorite: (slug: string): Promise<ArticleResponse> => requests.post(`/articles/${slug}/favorite`),
-  favoritedBy: (author: string, page: number): Promise<ArticleListResponse> =>
+  favoritedBy: (author: string, page?: number): Promise<ArticleListResponse> =>
     requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
-  feed: () => requests.get('/articles/feed?limit=10&offset=0'),
+  feed: (): Promise<ArticleListResponse> => requests.get('/articles/feed?limit=10&offset=0'),
   get: (slug: string): Promise<ArticleResponse> => requests.get(`/articles/${slug}`),
   unfavorite: (slug: string): Promise<ArticleResponse> =>
     requests.del(`/articles/${slug}/favorite`),

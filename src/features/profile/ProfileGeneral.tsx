@@ -1,12 +1,14 @@
-import { Profile } from 'api/profile'
+import { AsyncThunk } from '@reduxjs/toolkit'
+import { ArticleListResponse } from 'api/article'
+import { Profile, ProfileResponse } from 'api/profile'
 import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ArticleList from 'features/articleList/ArticleList'
 import { followUser, selectProfile, unfollowUser } from 'features/profile/profileSlice'
-import React, { MouseEventHandler, useEffect } from 'react'
+import React, { MouseEventHandler, NamedExoticComponent, useEffect } from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom'
 
-const EditProfileSettings: React.NamedExoticComponent<{ isUser: boolean }> = React.memo((props) => {
+const EditProfileSettings: NamedExoticComponent<{ isUser: boolean }> = React.memo((props) => {
   if (props.isUser) {
     return (
       <Link to="/settings" className="btn btn-sm btn-outline-secondary action-btn">
@@ -18,7 +20,7 @@ const EditProfileSettings: React.NamedExoticComponent<{ isUser: boolean }> = Rea
   return null
 })
 
-const FollowUserButton: React.NamedExoticComponent<{
+const FollowUserButton: NamedExoticComponent<{
   isUser: boolean
   user: Profile
   follow: (username: string) => void
@@ -54,15 +56,13 @@ const FollowUserButton: React.NamedExoticComponent<{
 })
 
 type Props = {
-  pageLoad: any
-  pager: (page: number) => void
-  currentPage: number
+  pageLoad: AsyncThunk<[ProfileResponse, ArticleListResponse], string, {}>
   isFavorite?: boolean
 } & RouteComponentProps<{
   username: string
 }>
 
-const ProfileGeneral: React.FC<Props> = ({ match, pageLoad, pager, currentPage, isFavorite }) => {
+const ProfileGeneral: React.FC<Props> = ({ match, pageLoad, isFavorite }) => {
   const dispatch = useAppDispatch()
   const { currentUser } = useAppSelector(selectApp)
   const { profile } = useAppSelector(selectProfile)
@@ -136,7 +136,7 @@ const ProfileGeneral: React.FC<Props> = ({ match, pageLoad, pager, currentPage, 
               </ul>
             </div>
 
-            <ArticleList pager={pager} currentPage={currentPage} />
+            <ArticleList />
           </div>
         </div>
       </div>

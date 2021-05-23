@@ -74,20 +74,20 @@ const Editor: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   }
 
   useEffect(() => {
+    const unmount = () => {
+      dispatch(pageUnload())
+    }
+
     if (match.params.slug) {
       dispatch(pageUnload())
       dispatch(pageLoad(match.params.slug))
-      return
+      return unmount
     }
 
     dispatch(pageLoad(null))
-  }, [dispatch, match.params.slug])
 
-  useEffect(() => {
-    return () => {
-      dispatch(pageUnload())
-    }
-  }, [dispatch])
+    return unmount
+  }, [dispatch, match.params.slug])
 
   return (
     <div className="editor-page">

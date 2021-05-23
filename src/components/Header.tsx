@@ -1,12 +1,12 @@
 import { User } from 'api/user'
-import React from 'react'
+import React, { NamedExoticComponent } from 'react'
 import { Link } from 'react-router-dom'
 
 interface Props {
   currentUser: User | null
 }
 
-const LoggedOut: React.NamedExoticComponent<Props> = React.memo(({ currentUser }) => {
+const LoggedOut: NamedExoticComponent<Props> = React.memo(({ currentUser }) => {
   if (currentUser) {
     return null
   }
@@ -34,7 +34,7 @@ const LoggedOut: React.NamedExoticComponent<Props> = React.memo(({ currentUser }
   )
 })
 
-const LoggedIn: React.NamedExoticComponent<Props> = React.memo(({ currentUser }) => {
+const LoggedIn: NamedExoticComponent<Props> = React.memo(({ currentUser }) => {
   if (!currentUser) {
     return null
   }
