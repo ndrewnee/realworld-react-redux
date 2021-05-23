@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import agent from 'api/agent'
+import api from 'api'
+import { RegisterRequest } from 'api/user'
 import { RootState } from 'app/store'
-import { RegisterRequest } from 'models/user'
 
 interface RegisterState {
   inProgress: boolean
@@ -15,10 +15,10 @@ const initialState: RegisterState = {
 }
 
 export const signup = createAsyncThunk('register/signup', async (user: RegisterRequest) => {
-  const response = await agent.Auth.register(user)
+  const response = await api.Auth.register(user)
   if (response.user?.token) {
     window.localStorage.setItem('jwt', response.user.token)
-    agent.setToken(response.user.token)
+    api.setToken(response.user.token)
   }
 
   return response

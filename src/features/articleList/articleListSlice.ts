@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import agent from 'api/agent'
+import api from 'api'
+import { Article } from 'api/article'
 import { RootState } from 'app/store'
-import { pageLoad as profilePageLoad, favoritesPageLoad } from 'features/profile/profileSlice'
-import { Article } from 'models/article'
+import { favoritesPageLoad, pageLoad as profilePageLoad } from 'features/profile/profileSlice'
 
 interface ArticleListState {
   articles?: Article[]
@@ -15,12 +15,12 @@ const initialState: ArticleListState = {
 
 export const favoriteArticle = createAsyncThunk(
   'articleList/favoriteArticle',
-  agent.Articles.favorite,
+  api.Articles.favorite,
 )
 
 export const unfavoriteArticle = createAsyncThunk(
   'articleList/unfavoriteArticle',
-  agent.Articles.unfavorite,
+  api.Articles.unfavorite,
 )
 
 const articleListSlice = createSlice({

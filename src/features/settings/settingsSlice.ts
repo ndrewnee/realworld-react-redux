@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import agent from 'api/agent'
+import api from 'api'
 import { RootState } from 'app/store'
 
 interface SettingsState {
@@ -13,7 +13,7 @@ const initialState: SettingsState = {
   inProgress: false,
 }
 
-export const saveUser = createAsyncThunk('settings/saveUser', agent.Auth.save)
+export const saveUser = createAsyncThunk('settings/saveUser', api.Auth.save)
 
 const settingsSlice = createSlice({
   name: 'settings',

@@ -1,3 +1,4 @@
+import { ArticleEdit } from 'api/article'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
 import {
@@ -7,7 +8,6 @@ import {
   submitArticle,
   updateField,
 } from 'features/editor/editorSlice'
-import { ArticleEdit } from 'models/article'
 import React, {
   ChangeEventHandler,
   FormEventHandler,

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import agent from 'api/agent'
+import api from 'api'
+import { Profile } from 'api/profile'
 import { RootState } from 'app/store'
-import { Profile } from 'models/profile'
 
 interface ProfileState {
   profile?: Profile
@@ -10,18 +10,18 @@ interface ProfileState {
 const initialState: ProfileState = {}
 
 export const pageLoad = createAsyncThunk('profile/pageLoad', async (username: string) =>
-  Promise.all([agent.Profile.get(username), agent.Articles.byAuthor(username, 0)]),
+  Promise.all([api.Profile.get(username), api.Articles.byAuthor(username, 0)]),
 )
 
 export const favoritesPageLoad = createAsyncThunk(
   'profile/favoritesPageLoad',
   async (username: string) =>
-    Promise.all([agent.Profile.get(username), agent.Articles.favoritedBy(username, 0)]),
+    Promise.all([api.Profile.get(username), api.Articles.favoritedBy(username, 0)]),
 )
 
-export const followUser = createAsyncThunk('profile/followUser', agent.Profile.follow)
+export const followUser = createAsyncThunk('profile/followUser', api.Profile.follow)
 
-export const unfollowUser = createAsyncThunk('profile/unfollowUser', agent.Profile.unfollow)
+export const unfollowUser = createAsyncThunk('profile/unfollowUser', api.Profile.unfollow)
 
 const profileSlice = createSlice({
   name: 'profile',

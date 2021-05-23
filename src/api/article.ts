@@ -1,4 +1,4 @@
-import { User } from './user'
+import { User } from 'api/user'
 
 export interface Article {
   slug: string

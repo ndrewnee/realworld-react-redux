@@ -1,10 +1,10 @@
-import agent from 'api/agent'
+import api from 'api'
+import { SaveUserRequest } from 'api/user'
 import { logout } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
 import SettingsForm from 'features/settings/SettingsForm'
 import { saveUser, selectSettings } from 'features/settings/settingsSlice'
-import { SaveUserRequest } from 'models/user'
 import React, { MouseEventHandler } from 'react'
 
 const Settings: React.FC = () => {
@@ -15,7 +15,7 @@ const Settings: React.FC = () => {
 
   const clickLogout: MouseEventHandler = () => {
     window.localStorage.removeItem('jwt')
-    agent.setToken(null)
+    api.setToken(null)
     dispatch(logout())
   }
 

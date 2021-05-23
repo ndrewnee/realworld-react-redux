@@ -1,6 +1,6 @@
-import { ArticleEdit, ArticleListResponse, ArticleResponse } from 'models/article'
-import { ProfileResponse } from 'models/profile'
-import { LoginRequest, RegisterRequest, SaveUserRequest, UserResponse } from 'models/user'
+import { ArticleEdit, ArticleListResponse, ArticleResponse } from 'api/article'
+import { ProfileResponse } from 'api/profile'
+import { LoginRequest, RegisterRequest, SaveUserRequest, UserResponse } from 'api/user'
 import superagent from 'superagent'
 
 const API_ROOT = process.env.REACT_APP_BACKEND_URL || 'https://conduit.productionready.io/api'
@@ -85,7 +85,7 @@ const Profile = {
     requests.del(`/profiles/${username}/follow`),
 }
 
-const agent = {
+const api = {
   Articles,
   Auth,
   Comments,
@@ -96,4 +96,4 @@ const agent = {
   },
 }
 
-export default agent
+export default api

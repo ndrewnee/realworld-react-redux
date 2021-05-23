@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import agent from 'api/agent'
+import api from 'api'
+import { ArticleEdit } from 'api/article'
 import { RootState } from 'app/store'
-import { ArticleEdit } from 'models/article'
 
 interface EditorState {
   slug?: string
@@ -24,13 +24,13 @@ const initialState: EditorState = {
 }
 
 export const pageLoad = createAsyncThunk('editor/pageLoad', async (slug: string | null) =>
-  slug ? agent.Articles.get(slug) : null,
+  slug ? api.Articles.get(slug) : null,
 )
 
 export const submitArticle = createAsyncThunk(
   'editor/submitArticle',
   async (article: ArticleEdit) =>
-    article.slug ? agent.Articles.update(article) : agent.Articles.create(article),
+    article.slug ? api.Articles.update(article) : api.Articles.create(article),
 )
 
 const editorSlice = createSlice({

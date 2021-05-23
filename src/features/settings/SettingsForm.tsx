@@ -1,7 +1,7 @@
+import { SaveUserRequest } from 'api/user'
 import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { pageUnload, selectSettings } from 'features/settings/settingsSlice'
-import { SaveUserRequest } from 'models/user'
 import { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react'
 
 interface Props {
