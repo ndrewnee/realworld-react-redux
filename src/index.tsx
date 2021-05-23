@@ -1,6 +1,6 @@
-import App from 'app/App'
 import store, { history } from 'app/store'
 import { ConnectedRouter } from 'connected-react-router'
+import App from 'features/app/App'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'

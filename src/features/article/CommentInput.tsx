@@ -1,5 +1,5 @@
-import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { selectApp } from 'features/app/appSlice'
 import React, { ChangeEventHandler, FormEventHandler, useState } from 'react'
 import { addComment, selectArticle } from './articleSlice'
 

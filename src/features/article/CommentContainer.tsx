@@ -1,11 +1,11 @@
-import { selectApp } from 'app/appSlice'
 import { useAppSelector } from 'app/hooks'
-import CommentInput from './CommentInput'
-import CommentList from './CommentList'
+import ListErrors from 'components/ListErrors'
+import { selectApp } from 'features/app/appSlice'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { selectArticle } from './articleSlice'
-import ListErrors from 'components/ListErrors'
+import CommentInput from './CommentInput'
+import CommentList from './CommentList'
 
 const CommentContainer: React.FC<{}> = () => {
   const { currentUser } = useAppSelector(selectApp)

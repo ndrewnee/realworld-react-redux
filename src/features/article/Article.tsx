@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import marked from 'marked'
 import DOMPurify from 'dompurify'
+import marked from 'marked'
 import React, { useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import ArticleMeta from './ArticleMeta'

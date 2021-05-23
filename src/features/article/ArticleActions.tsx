@@ -1,8 +1,8 @@
-import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { deleteArticle, selectArticle } from './articleSlice'
+import { selectApp } from 'features/app/appSlice'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { deleteArticle, selectArticle } from './articleSlice'
 
 const ArticleActions: React.FC<{}> = () => {
   const dispatch = useAppDispatch()

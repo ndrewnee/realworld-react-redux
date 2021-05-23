@@ -1,9 +1,9 @@
 import api from 'api'
-import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { selectApp } from 'features/app/appSlice'
 import ArticleList from 'features/articleList/ArticleList'
-import { articlesByTab, changeTab, selectHome } from './homeSlice'
 import React, { MouseEventHandler, NamedExoticComponent } from 'react'
+import { articlesByTab, changeTab, selectHome } from './homeSlice'
 
 const YourFeedTab: NamedExoticComponent<{}> = React.memo(() => {
   const dispatch = useAppDispatch()

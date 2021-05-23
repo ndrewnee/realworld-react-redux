@@ -1,12 +1,12 @@
 import { AsyncThunk } from '@reduxjs/toolkit'
 import { ArticleListResponse } from 'api/article'
 import { Profile, ProfileResponse } from 'api/profile'
-import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { selectApp } from 'features/app/appSlice'
 import ArticleList from 'features/articleList/ArticleList'
-import { followUser, selectProfile, unfollowUser } from './profileSlice'
 import React, { MouseEventHandler, NamedExoticComponent, useEffect } from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom'
+import { followUser, selectProfile, unfollowUser } from './profileSlice'
 
 const EditProfileSettings: NamedExoticComponent<{ isUser: boolean }> = React.memo((props) => {
   if (props.isUser) {

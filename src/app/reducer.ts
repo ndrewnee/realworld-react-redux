@@ -1,5 +1,5 @@
-import app from './appSlice'
 import { connectRouter } from 'connected-react-router'
+import app from 'features/app/appSlice'
 import article from 'features/article/articleSlice'
 import articleList from 'features/articleList/articleListSlice'
 import editor from 'features/editor/editorSlice'

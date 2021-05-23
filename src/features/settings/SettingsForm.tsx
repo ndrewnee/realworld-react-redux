@@ -1,8 +1,8 @@
 import { SaveUserRequest } from 'api/user'
-import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { pageUnload, selectSettings } from './settingsSlice'
+import { selectApp } from 'features/app/appSlice'
 import { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react'
+import { pageUnload, selectSettings } from './settingsSlice'
 
 interface Props {
   onSubmitForm: (user: SaveUserRequest) => void

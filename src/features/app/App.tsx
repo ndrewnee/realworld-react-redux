@@ -1,5 +1,4 @@
-import { pageLoad, redirect, selectApp } from './appSlice'
-import { useAppDispatch, useAppSelector } from './hooks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
 import Header from 'components/Header'
 import { push } from 'connected-react-router'
 import Article from 'features/article/Article'
@@ -12,6 +11,7 @@ import Register from 'features/register/Register'
 import Settings from 'features/settings/Settings'
 import React, { Suspense, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { pageLoad, redirect, selectApp } from './appSlice'
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()

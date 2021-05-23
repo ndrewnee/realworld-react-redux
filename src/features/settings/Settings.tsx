@@ -1,11 +1,11 @@
 import api from 'api'
 import { SaveUserRequest } from 'api/user'
-import { logout } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ListErrors from 'components/ListErrors'
+import { logout } from 'features/app/appSlice'
+import React, { MouseEventHandler } from 'react'
 import SettingsForm from './SettingsForm'
 import { saveUser, selectSettings } from './settingsSlice'
-import React, { MouseEventHandler } from 'react'
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch()

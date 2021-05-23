@@ -1,11 +1,11 @@
 import api from 'api'
-import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { selectApp } from 'features/app/appSlice'
+import React, { useEffect } from 'react'
 import Banner from './Banner'
 import { changeTab, pageLoad, pageUnload } from './homeSlice'
 import MainView from './MainView'
 import Tags from './Tags'
-import React, { useEffect } from 'react'
 
 const Home: React.FC<{}> = () => {
   const dispatch = useAppDispatch()

@@ -1,6 +1,6 @@
 import { Comment } from 'api/comment'
-import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { selectApp } from 'features/app/appSlice'
 import React from 'react'
 import { deleteComment, selectArticle } from './articleSlice'
 

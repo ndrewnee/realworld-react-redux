@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import api from 'api'
 import { User } from 'api/user'
+import { RootState } from 'app/store'
 import { deleteArticle } from 'features/article/articleSlice'
 import { submitArticle } from 'features/editor/editorSlice'
 import { auth } from 'features/login/loginSlice'
 import { signup } from 'features/register/registerSlice'
 import { saveUser } from 'features/settings/settingsSlice'
-import { RootState } from './store'
 
 interface AppState {
   appLoaded: boolean

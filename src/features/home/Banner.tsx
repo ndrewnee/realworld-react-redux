@@ -1,5 +1,5 @@
-import { selectApp } from 'app/appSlice'
 import { useAppSelector } from 'app/hooks'
+import { selectApp } from 'features/app/appSlice'
 import React from 'react'
 
 const Banner: React.FC<{}> = () => {
