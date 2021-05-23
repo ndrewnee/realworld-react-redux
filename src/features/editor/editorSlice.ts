@@ -1,25 +1,31 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import api from 'api'
-import { ArticleEdit } from 'api/article'
+import { Article, ArticleEdit } from 'api/article'
 import { RootState } from 'app/store'
 
 interface EditorState {
-  slug?: string
-  title: string
-  description: string
-  body: string
-  tagList: string[]
+  article: Pick<Article, 'slug' | 'title' | 'description' | 'body' | 'tagList'>
   inProgress: boolean
   errors?: {
     [k: string]: string
   }
 }
 
+type UpdateFieldPayload = PayloadAction<{
+  title?: string
+  description?: string
+  body?: string
+  tagList?: string[]
+}>
+
 const initialState: EditorState = {
-  title: '',
-  description: '',
-  body: '',
-  tagList: [],
+  article: {
+    slug: '',
+    title: '',
+    description: '',
+    body: '',
+    tagList: [],
+  },
   inProgress: false,
 }
 
@@ -38,21 +44,21 @@ const editorSlice = createSlice({
   initialState,
   reducers: {
     pageUnload: () => initialState,
-    updateField: (state, { payload }) => {
-      state.title = payload?.title ?? state.title
-      state.description = payload?.description ?? state.description
-      state.body = payload?.body ?? state.body
-      state.tagList = payload?.tagList ?? state.tagList
+    updateField: (state, { payload }: UpdateFieldPayload) => {
+      if (!state.article) {
+        return
+      }
+
+      state.article.title = payload?.title ?? state.article.title
+      state.article.description = payload?.description ?? state.article.description
+      state.article.body = payload?.body ?? state.article.body
+      state.article.tagList = payload?.tagList ?? state.article.tagList
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(pageLoad.fulfilled, (state, { payload }) => {
-        state.slug = payload?.article?.slug ?? ''
-        state.title = payload?.article?.title ?? ''
-        state.description = payload?.article?.description ?? ''
-        state.body = payload?.article?.body ?? ''
-        state.tagList = payload?.article?.tagList ?? []
+        state.article = payload?.article ?? state.article
         state.errors = payload?.errors
         state.inProgress = false
       })

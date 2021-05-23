@@ -18,8 +18,8 @@ interface MatchParams {
 const Editor: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const dispatch = useAppDispatch()
   const [tagInput, setTagInput] = useState('')
-  const { slug, title, description, body, tagList, inProgress, errors } =
-    useAppSelector(selectEditor)
+  const { article, inProgress, errors } = useAppSelector(selectEditor)
+  const { slug, title, description, body, tagList } = article
 
   const updateFieldEvent: (
     key: string,
@@ -57,7 +57,7 @@ const Editor: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
     event.preventDefault()
 
     const article: ArticleEdit = {
-      slug: slug!,
+      slug: slug,
       title: title,
       description: description,
       body: body,
