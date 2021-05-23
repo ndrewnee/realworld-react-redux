@@ -1,16 +1,20 @@
+import api from 'api'
+import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import Banner from 'features/home/Banner'
+import { changeTab, pageLoad, pageUnload } from 'features/home/homeSlice'
 import MainView from 'features/home/MainView'
 import Tags from 'features/home/Tags'
-import { pageLoad, pageUnload } from 'features/home/homeSlice'
 import React, { useEffect } from 'react'
-import { selectApp } from 'app/appSlice'
 
 const Home: React.FC<{}> = () => {
   const dispatch = useAppDispatch()
   const { token } = useAppSelector(selectApp)
 
   useEffect(() => {
+    const tab = token ? 'feed' : 'all'
+    const pager = token ? api.Articles.feed : api.Articles.all
+    dispatch(changeTab({ tab, pager }))
     dispatch(pageLoad(token))
 
     return () => {

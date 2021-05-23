@@ -1,6 +1,7 @@
+import api from 'api'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import React, { MouseEventHandler } from 'react'
-import { articlesByTag, selectHome } from './homeSlice'
+import { articlesByTag, changeTag, selectHome } from './homeSlice'
 
 const Tags: React.FC<{}> = () => {
   const dispatch = useAppDispatch()
@@ -15,6 +16,7 @@ const Tags: React.FC<{}> = () => {
       {tags.map((tag) => {
         const handleClick: MouseEventHandler = (event) => {
           event.preventDefault()
+          dispatch(changeTag({ tag, pager: (page) => api.Articles.byTag(tag, page) }))
           dispatch(articlesByTag(tag))
         }
 

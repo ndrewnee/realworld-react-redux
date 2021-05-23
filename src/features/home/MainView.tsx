@@ -1,8 +1,9 @@
+import api from 'api'
 import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ArticleList from 'features/articleList/ArticleList'
+import { articlesByTab, changeTab, selectHome } from 'features/home/homeSlice'
 import React, { MouseEventHandler, NamedExoticComponent } from 'react'
-import { articlesByTab, selectHome } from 'features/home/homeSlice'
 
 const YourFeedTab: NamedExoticComponent<{}> = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -15,6 +16,7 @@ const YourFeedTab: NamedExoticComponent<{}> = React.memo(() => {
 
   const clickHandler: MouseEventHandler = (event) => {
     event.preventDefault()
+    dispatch(changeTab({ tab: 'feed', pager: api.Articles.feed }))
     dispatch(articlesByTab('feed'))
   }
 
@@ -37,6 +39,7 @@ const GlobalFeedTab: NamedExoticComponent<{}> = React.memo(() => {
 
   const clickHandler: MouseEventHandler = (event) => {
     event.preventDefault()
+    dispatch(changeTab({ tab: 'all', pager: api.Articles.all }))
     dispatch(articlesByTab('all'))
   }
 

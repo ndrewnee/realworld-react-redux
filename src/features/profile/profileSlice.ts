@@ -29,10 +29,10 @@ const profileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(pageLoad.fulfilled, (state, { payload }) => {
-      state.profile = payload[0].profile
+      state.profile = payload?.[0].profile
     })
     builder.addCase(favoritesPageLoad.fulfilled, (state, { payload }) => {
-      state.profile = payload[0].profile
+      state.profile = payload?.[0].profile
     })
     builder.addCase(followUser.fulfilled, (state, { payload }) => {
       state.profile = payload.profile

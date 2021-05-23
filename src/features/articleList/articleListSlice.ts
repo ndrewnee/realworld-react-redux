@@ -1,12 +1,18 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import api from 'api'
 import { Article, ArticleListResponse } from 'api/article'
 import { RootState } from 'app/store'
-import { articlesByTab, articlesByTag, pageLoad as homePageLoad } from 'features/home/homeSlice'
+import {
+  articlesByTab,
+  articlesByTag,
+  changeTab,
+  changeTag,
+  pageLoad as homePageLoad,
+} from 'features/home/homeSlice'
 import { favoritesPageLoad, pageLoad as profilePageLoad } from 'features/profile/profileSlice'
 
 interface ArticleListState {
-  articles?: Article[]
+  articles?: Article[] | null
   articlesCount: number
   currentPage: number
   pager: (page?: number) => Promise<ArticleListResponse>
@@ -36,53 +42,55 @@ export const articlesByPage = createAsyncThunk(
   }: {
     pager: (page?: number) => Promise<ArticleListResponse>
     page: number
-  }) => {
-    const articles = await pager(page)
-    return {
-      page,
-      articles,
-    }
-  },
+  }) => pager(page),
 )
 
 const articleListSlice = createSlice({
   name: 'articleList',
   initialState,
   reducers: {
+    changePage: (state, { payload }: PayloadAction<number>) => {
+      state.currentPage = payload
+    },
     pageUnload: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(homePageLoad.fulfilled, (state, { payload }) => {
-      state.articles = payload.articles.articles
-      state.articlesCount = payload.articles.articlesCount
+    builder.addCase(changeTag, (state, { payload }) => {
+      state.articles = null
+      state.articlesCount = 0
       state.pager = payload.pager
       state.currentPage = 0
+    })
+    builder.addCase(changeTab, (state, { payload }) => {
+      state.articles = null
+      state.articlesCount = 0
+      state.pager = payload.pager
+      state.currentPage = 0
+    })
+    builder.addCase(homePageLoad.fulfilled, (state, { payload }) => {
+      state.articles = payload?.[1].articles
+      state.articlesCount = payload?.[1].articlesCount
     })
     builder.addCase(articlesByTag.fulfilled, (state, { payload }) => {
-      state.articles = payload.articles.articles
-      state.articlesCount = payload.articles.articlesCount
-      state.pager = payload.pager
-      state.currentPage = 0
+      state.articles = payload.articles
+      state.articlesCount = payload.articlesCount
     })
     builder.addCase(articlesByTab.fulfilled, (state, { payload }) => {
-      state.articles = payload.articles.articles
-      state.articlesCount = payload.articles.articlesCount
-      state.pager = payload.pager
-      state.currentPage = 0
+      state.articles = payload.articles
+      state.articlesCount = payload.articlesCount
     })
     builder.addCase(articlesByPage.fulfilled, (state, { payload }) => {
-      state.articles = payload.articles.articles
-      state.articlesCount = payload.articles.articlesCount
-      state.currentPage = payload.page
+      state.articles = payload.articles
+      state.articlesCount = payload.articlesCount
     })
     builder.addCase(profilePageLoad.fulfilled, (state, { payload }) => {
-      state.articles = payload[1].articles
-      state.articlesCount = payload[1].articlesCount
+      state.articles = payload?.[1].articles
+      state.articlesCount = payload?.[1].articlesCount
       state.currentPage = 0
     })
     builder.addCase(favoritesPageLoad.fulfilled, (state, { payload }) => {
-      state.articles = payload[1].articles
-      state.articlesCount = payload[1].articlesCount
+      state.articles = payload?.[1].articles
+      state.articlesCount = payload?.[1].articlesCount
       state.currentPage = 0
     })
     builder.addCase(favoriteArticle.fulfilled, (state, { payload }) => {
@@ -110,6 +118,6 @@ const articleListSlice = createSlice({
 
 export const selectArticleList = (state: RootState) => state.articleList
 
-export const { pageUnload } = articleListSlice.actions
+export const { pageUnload, changePage } = articleListSlice.actions
 
 export default articleListSlice.reducer
