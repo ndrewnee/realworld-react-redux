@@ -26,7 +26,9 @@ export const unfavoriteArticle = createAsyncThunk(
 const articleListSlice = createSlice({
   name: 'articleList',
   initialState,
-  reducers: {},
+  reducers: {
+    pageUnload: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(profilePageLoad.fulfilled, (state, { payload }) => {
       state.articles = payload[1].articles
@@ -60,5 +62,7 @@ const articleListSlice = createSlice({
 })
 
 export const selectArticleList = (state: RootState) => state.articleList
+
+export const { pageUnload } = articleListSlice.actions
 
 export default articleListSlice.reducer

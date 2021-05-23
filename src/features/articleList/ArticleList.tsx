@@ -1,8 +1,8 @@
-import { useAppSelector } from 'app/hooks'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { pageUnload, selectArticleList } from 'features/articleList/articleListSlice'
 import ArticlePreview from 'features/articleList/ArticlePreview'
 import ListPagination from 'features/articleList/ListPagination'
-import React from 'react'
-import { selectArticleList } from 'features/articleList/articleListSlice'
+import React, { useEffect } from 'react'
 
 interface Props {
   currentPage: number
@@ -10,6 +10,14 @@ interface Props {
 }
 
 const ArticleList: React.FC<Props> = ({ currentPage, pager }) => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    return () => {
+      dispatch(pageUnload())
+    }
+  }, [dispatch])
+
   const { articles, articlesCount } = useAppSelector(selectArticleList)
 
   if (!articles) {

@@ -1,7 +1,7 @@
 import { selectApp } from 'app/appSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import ArticleList from 'features/articleList/ArticleList'
-import { followUser, pageUnload, selectProfile, unfollowUser } from 'features/profile/profileSlice'
+import { followUser, selectProfile, unfollowUser } from 'features/profile/profileSlice'
 import { Profile } from 'models/profile'
 import React, { MouseEventHandler, useEffect } from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom'
@@ -78,12 +78,6 @@ const ProfileGeneral: React.FC<Props> = ({ match, pageLoad, pager, currentPage, 
   useEffect(() => {
     dispatch(pageLoad(match.params.username))
   }, [dispatch, pageLoad, match.params.username])
-
-  useEffect(() => {
-    return () => {
-      dispatch(pageUnload())
-    }
-  }, [dispatch])
 
   if (!profile) {
     return null

@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import agent from 'api/agent'
 import { RootState } from 'app/store'
+import { submitArticle } from 'features/editor/editorSlice'
 import { auth } from 'features/login/loginSlice'
 import { signup } from 'features/register/registerSlice'
 import { saveUser } from 'features/settings/settingsSlice'
-import { submitArticle } from 'features/editor/editorSlice'
 import { User } from 'models/user'
 
 interface AppState {
@@ -56,6 +56,7 @@ const appSlice = createSlice({
         state.redirectTo = payload.errors ? null : '/'
       })
       .addCase(saveUser.fulfilled, (state, { payload }) => {
+        state.currentUser = payload.user ?? state.currentUser
         state.redirectTo = payload.errors ? null : '/'
       })
       .addCase(submitArticle.fulfilled, (state, { payload }) => {

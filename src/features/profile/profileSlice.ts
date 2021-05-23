@@ -26,9 +26,7 @@ export const unfollowUser = createAsyncThunk('profile/unfollowUser', agent.Profi
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {
-    pageUnload: () => initialState,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(pageLoad.fulfilled, (state, { payload }) => {
       state.profile = payload[0].profile
@@ -46,6 +44,5 @@ const profileSlice = createSlice({
 })
 
 export const selectProfile = (state: RootState) => state.profile
-export const { pageUnload } = profileSlice.actions
 
 export default profileSlice.reducer
