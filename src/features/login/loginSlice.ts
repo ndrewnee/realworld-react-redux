@@ -39,8 +39,8 @@ const loginSlice = createSlice({
         state.errors = payload.errors
         state.inProgress = false
       })
-      .addCase(auth.rejected, (state, action) => {
-        state.errors = { [action.error.name!]: action.error.message! }
+      .addCase(auth.rejected, (state, { error }) => {
+        state.errors = { [error.name!]: error.message! }
         state.inProgress = false
       })
   },

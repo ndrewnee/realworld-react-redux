@@ -28,18 +28,19 @@ const profileSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(pageLoad.fulfilled, (state, { payload }) => {
-      state.profile = payload?.[0].profile
-    })
-    builder.addCase(favoritesPageLoad.fulfilled, (state, { payload }) => {
-      state.profile = payload?.[0].profile
-    })
-    builder.addCase(followUser.fulfilled, (state, { payload }) => {
-      state.profile = payload.profile
-    })
-    builder.addCase(unfollowUser.fulfilled, (state, { payload }) => {
-      state.profile = payload.profile
-    })
+    builder
+      .addCase(pageLoad.fulfilled, (state, { payload }) => {
+        state.profile = payload?.[0].profile
+      })
+      .addCase(favoritesPageLoad.fulfilled, (state, { payload }) => {
+        state.profile = payload?.[0].profile
+      })
+      .addCase(followUser.fulfilled, (state, { payload }) => {
+        state.profile = payload.profile
+      })
+      .addCase(unfollowUser.fulfilled, (state, { payload }) => {
+        state.profile = payload.profile
+      })
   },
 })
 

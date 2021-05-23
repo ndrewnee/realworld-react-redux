@@ -30,8 +30,8 @@ const settingsSlice = createSlice({
         state.errors = payload.errors
         state.inProgress = false
       })
-      .addCase(saveUser.rejected, (state, action) => {
-        state.errors = { [action.error.name!]: action.error.message! }
+      .addCase(saveUser.rejected, (state, { error }) => {
+        state.errors = { [error.name!]: error.message! }
         state.inProgress = false
       })
   },

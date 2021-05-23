@@ -56,6 +56,9 @@ const editorSlice = createSlice({
         state.errors = payload?.errors
         state.inProgress = false
       })
+      .addCase(pageLoad.rejected, (state, { error }) => {
+        state.errors = { [error.name!]: error.message! }
+      })
       .addCase(submitArticle.pending, (state) => {
         state.inProgress = true
       })
@@ -63,8 +66,8 @@ const editorSlice = createSlice({
         state.errors = payload?.errors
         state.inProgress = false
       })
-      .addCase(submitArticle.rejected, (state, action) => {
-        state.errors = { [action.error.name!]: action.error.message! }
+      .addCase(submitArticle.rejected, (state, { error }) => {
+        state.errors = { [error.name!]: error.message! }
         state.inProgress = false
       })
   },

@@ -55,54 +55,55 @@ const articleListSlice = createSlice({
     pageUnload: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(changeTag, (state, { payload }) => {
-      state.articles = null
-      state.articlesCount = 0
-      state.pager = payload.pager
-      state.currentPage = 0
-    })
-    builder.addCase(changeTab, (state, { payload }) => {
-      state.articles = null
-      state.articlesCount = 0
-      state.pager = payload.pager
-      state.currentPage = 0
-    })
-    builder.addCase(homePageLoad.fulfilled, (state, { payload }) => {
-      state.articles = payload?.[1].articles
-      state.articlesCount = payload?.[1].articlesCount
-    })
-    builder.addCase(articlesByTag.fulfilled, (state, { payload }) => {
-      state.articles = payload.articles
-      state.articlesCount = payload.articlesCount
-    })
-    builder.addCase(articlesByTab.fulfilled, (state, { payload }) => {
-      state.articles = payload.articles
-      state.articlesCount = payload.articlesCount
-    })
-    builder.addCase(articlesByPage.fulfilled, (state, { payload }) => {
-      state.articles = payload.articles
-      state.articlesCount = payload.articlesCount
-    })
-    builder.addCase(profilePageLoad.fulfilled, (state, { payload }) => {
-      state.articles = payload?.[1].articles
-      state.articlesCount = payload?.[1].articlesCount
-      state.currentPage = 0
-    })
-    builder.addCase(favoritesPageLoad.fulfilled, (state, { payload }) => {
-      state.articles = payload?.[1].articles
-      state.articlesCount = payload?.[1].articlesCount
-      state.currentPage = 0
-    })
-    builder.addCase(favoriteArticle.fulfilled, (state, { payload }) => {
-      state.articles = state.articles?.map((article) => {
-        if (article.slug === payload.article?.slug) {
-          article.favorited = payload.article.favorited
-          article.favoritesCount = payload.article.favoritesCount
-        }
-
-        return article
+    builder
+      .addCase(changeTag, (state, { payload }) => {
+        state.articles = null
+        state.articlesCount = 0
+        state.pager = payload.pager
+        state.currentPage = 0
       })
-    })
+      .addCase(changeTab, (state, { payload }) => {
+        state.articles = null
+        state.articlesCount = 0
+        state.pager = payload.pager
+        state.currentPage = 0
+      })
+      .addCase(homePageLoad.fulfilled, (state, { payload }) => {
+        state.articles = payload?.[1].articles
+        state.articlesCount = payload?.[1].articlesCount
+      })
+      .addCase(articlesByTag.fulfilled, (state, { payload }) => {
+        state.articles = payload.articles
+        state.articlesCount = payload.articlesCount
+      })
+      .addCase(articlesByTab.fulfilled, (state, { payload }) => {
+        state.articles = payload.articles
+        state.articlesCount = payload.articlesCount
+      })
+      .addCase(articlesByPage.fulfilled, (state, { payload }) => {
+        state.articles = payload.articles
+        state.articlesCount = payload.articlesCount
+      })
+      .addCase(profilePageLoad.fulfilled, (state, { payload }) => {
+        state.articles = payload?.[1].articles
+        state.articlesCount = payload?.[1].articlesCount
+        state.currentPage = 0
+      })
+      .addCase(favoritesPageLoad.fulfilled, (state, { payload }) => {
+        state.articles = payload?.[1].articles
+        state.articlesCount = payload?.[1].articlesCount
+        state.currentPage = 0
+      })
+      .addCase(favoriteArticle.fulfilled, (state, { payload }) => {
+        state.articles = state.articles?.map((article) => {
+          if (article.slug === payload.article?.slug) {
+            article.favorited = payload.article.favorited
+            article.favoritesCount = payload.article.favoritesCount
+          }
+
+          return article
+        })
+      })
     builder.addCase(unfavoriteArticle.fulfilled, (state, { payload }) => {
       state.articles = state.articles?.map((article) => {
         if (article.slug === payload.article?.slug) {

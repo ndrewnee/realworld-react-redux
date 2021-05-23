@@ -39,8 +39,8 @@ const registerSlice = createSlice({
         state.errors = payload.errors
         state.inProgress = false
       })
-      .addCase(signup.rejected, (state, action) => {
-        state.errors = { [action.error.name!]: action.error.message! }
+      .addCase(signup.rejected, (state, { error }) => {
+        state.errors = { [error.name!]: error.message! }
         state.inProgress = false
       })
   },

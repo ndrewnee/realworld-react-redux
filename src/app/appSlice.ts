@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import api from 'api'
 import { User } from 'api/user'
-import { RootState } from './store'
+import { deleteArticle } from 'features/article/articleSlice'
 import { submitArticle } from 'features/editor/editorSlice'
 import { auth } from 'features/login/loginSlice'
 import { signup } from 'features/register/registerSlice'
 import { saveUser } from 'features/settings/settingsSlice'
+import { RootState } from './store'
 
 interface AppState {
   appLoaded: boolean
@@ -21,7 +22,7 @@ const initialState: AppState = {
   token: null,
 }
 
-export const pageLoad = createAsyncThunk('./pageLoad', async () => {
+export const pageLoad = createAsyncThunk('app/pageLoad', async () => {
   const token = window.localStorage.getItem('jwt')
   if (token) {
     api.setToken(token)
@@ -62,6 +63,9 @@ const appSlice = createSlice({
       .addCase(submitArticle.fulfilled, (state, { payload }) => {
         const redirectUrl = payload.article ? `/article/${payload.article.slug}` : null
         state.redirectTo = redirectUrl
+      })
+      .addCase(deleteArticle.fulfilled, (state, { payload }) => {
+        state.redirectTo = '/'
       })
   },
 })

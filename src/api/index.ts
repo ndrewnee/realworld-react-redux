@@ -2,6 +2,7 @@ import { ArticleEdit, ArticleListResponse, ArticleResponse } from 'api/article'
 import { ProfileResponse } from 'api/profile'
 import { LoginRequest, RegisterRequest, SaveUserRequest, UserResponse } from 'api/user'
 import superagent from 'superagent'
+import { CommentResponse, CommentListResponse } from './comment'
 import { TagsResponse } from './tag'
 
 const API_ROOT = process.env.REACT_APP_BACKEND_URL || 'https://conduit.productionready.io/api'
@@ -57,7 +58,7 @@ const Articles = {
     requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag: string, page?: number): Promise<ArticleListResponse> =>
     requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
-  del: (slug: string) => requests.del(`/articles/${slug}`),
+  del: (slug: string): Promise<{}> => requests.del(`/articles/${slug}`),
   favorite: (slug: string): Promise<ArticleResponse> => requests.post(`/articles/${slug}/favorite`),
   favoritedBy: (author: string, page?: number): Promise<ArticleListResponse> =>
     requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
@@ -72,11 +73,12 @@ const Articles = {
 }
 
 const Comments = {
-  create: (slug: string, comment: string) =>
-    requests.post(`/articles/${slug}/comments`, { comment }),
-  delete: (slug: string, commentId: string) =>
+  create: (slug: string, body: string): Promise<CommentResponse> =>
+    requests.post(`/articles/${slug}/comments`, { body }),
+  del: (slug: string, commentId: string): Promise<{}> =>
     requests.del(`/articles/${slug}/comments/${commentId}`),
-  forArticle: (slug: string) => requests.get(`/articles/${slug}/comments`),
+  forArticle: (slug: string): Promise<CommentListResponse> =>
+    requests.get(`/articles/${slug}/comments`),
 }
 
 const Profile = {

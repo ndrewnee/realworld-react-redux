@@ -6,3 +6,14 @@ export interface Comment {
   createdAt: string
   author: User
 }
+
+export interface CommentListResponse {
+  comments: Comment[]
+}
+
+export interface CommentResponse {
+  comment?: Comment
+  errors?: {
+    [k: string]: string
+  }
+}

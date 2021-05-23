@@ -1,7 +1,8 @@
-import { pageLoad, redirect, selectApp } from 'app/appSlice'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { pageLoad, redirect, selectApp } from './appSlice'
+import { useAppDispatch, useAppSelector } from './hooks'
 import Header from 'components/Header'
 import { push } from 'connected-react-router'
+import Article from 'features/article/Article'
 import Editor from 'features/editor/Editor'
 import Home from 'features/home/Home'
 import Login from 'features/login/Login'
@@ -43,9 +44,10 @@ const App: React.FC = () => {
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/settings" component={Settings} />
           <Route path="/editor/:slug" component={Editor} />
           <Route path="/editor" component={Editor} />
+          <Route path="/article/:id" component={Article} />
+          <Route path="/settings" component={Settings} />
           <Route path="/@:username/favorites" component={ProfileFavorites} />
           <Route path="/@:username" component={Profile} />
         </Switch>
