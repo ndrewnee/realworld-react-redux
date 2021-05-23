@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import marked from 'marked'
+import DOMPurify from 'dompurify'
 import React, { useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import ArticleMeta from './ArticleMeta'
@@ -27,7 +28,9 @@ const Article: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
     return null
   }
 
-  const markup = { __html: marked(article.body, { sanitize: true }) }
+  const markup = {
+    __html: DOMPurify.sanitize(marked(article.body), { USE_PROFILES: { html: true } }),
+  }
 
   return (
     <div className="article-page">
