@@ -51,9 +51,13 @@ const appSlice = createSlice({
         state.token = payload?.user?.token ?? null
       })
       .addCase(auth.fulfilled, (state, { payload }) => {
+        state.currentUser = payload?.user ?? null
+        state.token = payload?.user?.token ?? null
         state.redirectTo = payload.errors ? null : '/'
       })
       .addCase(signup.fulfilled, (state, { payload }) => {
+        state.currentUser = payload?.user ?? null
+        state.token = payload?.user?.token ?? null
         state.redirectTo = payload.errors ? null : '/'
       })
       .addCase(saveUser.fulfilled, (state, { payload }) => {
