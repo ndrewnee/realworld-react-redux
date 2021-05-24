@@ -2,16 +2,8 @@
   "name": "realworld-react-redux",
   "homepage": "https://ndrewnee.github.io/realworld-react-redux/",
   "version": "1.0.0",
-  "private": true,
+  "license": "MIT",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.5.1",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
     "connected-react-router": "^6.9.1",
     "dompurify": "^2.2.8",
     "marked": "^2.0.5",
@@ -22,7 +14,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "superagent": "^6.1.0",
-    "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -52,10 +43,19 @@
     ]
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^13.1.9",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.6.0",
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
     "@types/dompurify": "^2.2.2",
     "@types/marked": "^2.0.3",
     "@types/react-router-dom": "^5.1.7",
     "@types/superagent": "^4.1.11",
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "typescript": "^4.2.4"
   }
 }
