@@ -3,7 +3,9 @@ import createReducer from './reducer'
 import { routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 
-export const history = createBrowserHistory()
+export const history = createBrowserHistory({
+  basename: '/realworld-react-redux',
+})
 
 const store = configureStore({
   reducer: createReducer(history),
