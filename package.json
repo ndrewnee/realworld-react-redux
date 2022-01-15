@@ -6,7 +6,7 @@
   "dependencies": {
     "connected-react-router": "^6.9.1",
     "dompurify": "^2.2.8",
-    "marked": "^2.0.5",
+    "marked": "^4.0.10",
     "prettier": "^2.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
